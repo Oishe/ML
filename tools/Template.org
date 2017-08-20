@@ -1,0 +1,10 @@
+#+TITLE:Machine Learning
+#+SUBTITLE:A Collection of Notes
+#+AUTHOR:Oishe Farhan
+#+EMAIL:farhanoishe@gmail.com
+#+DATE:August 17, 2017
+#+HTML_LINK_HOME: ./index.html
+#+HTML_LINK_UP:
+#+OPTIONS: H:3 num:t timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t 
+#+OPTIONS: tags:t todo:t tasks:t html-postamble:t <:nil broken-links:mark 
+#+HTML_MATHJAX: align:center tagside:right font:Neo-Euler
