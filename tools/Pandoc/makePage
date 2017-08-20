@@ -1,0 +1,17 @@
+#!/bin/bash
+set -ex
+#Exit when any line fails and print each command executed
+ 
+if [ -e $1 ] # input file exists
+then
+  name=$(echo $1 | cut -f 1 -d '.')
+  cat TemplateNoEnd.html > ${name}.html
+#  print >> ${name}.html
+#  pandoc --mathjax $1 -t html >> ${name}.html
+  pandoc $1 -t html >> ${name}.html
+  echo "</body>" >> ${name}.html
+  echo "</html>" >> ${name}.html
+else
+  echo "not a valid file"
+fi
+

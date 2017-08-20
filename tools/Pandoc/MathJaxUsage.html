@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MathJax Equations</title>
+    <h1><a href="../index.html">Home</a></h1>
+    <!-- MathJax -->
+    <!-- Latex in line formatting -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } });
+    </script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ], processEscapes: true } });
+    </script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <!-- MathJax -->
+  </head>
+  <body>
+    <h1>MathJax Equations</h1>
+    <h2>Usage</h2>
+    <p>
+      You can use inline equations with one dollar sign, like this: <code>$ J(x) = \int{L(t, x, \dot{x}) dt} $</code>.
+      <br />The equation above will render to this: $ J(x) = \int{L(t, x, \dot{x}) dt} $.
+    </p>
+    <p>
+      You can use equations with auto numbering using two dollar signs. For example, this equation <code>$$ E = m\cdot c^2 \label{eq:mc2}$$</code> will look like the equation below.
+      <br />You can refer to it as <code>\ref{eq:mc2}</code> (which will render to this: \ref{eq:mc2}).
+    </p>
+    <p>$$ E = m\cdot c^2 \label{eq:mc2}$$</p>
+    <!-- <script type="math/tex; mode=display">E = M\cdot c^2</script> -->
+    <h2>Examples</h2>
+    <p>$$W = \int{F \cdot dx}$$</p>
+    <p>
+      When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$$
+    </p>
+  </body>
+</html>
