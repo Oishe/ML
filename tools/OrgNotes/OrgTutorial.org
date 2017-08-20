@@ -1,0 +1,98 @@
+#+TITLE:Machine Learning
+#+SUBTITLE:A Collection of Notes
+#+AUTHOR:Oishe Farhan
+#+EMAIL:farhanoishe@gmail.com
+#+DATE:August 17, 2017
+#+HTML_LINK_HOME: ../../index.html
+#+HTML_LINK_UP:
+#+OPTIONS: H:2 num:t timestamp:nil toc:t \n:t ::nil |:t ^:{} f:t tex:t 
+#+OPTIONS: tags:t todo:t tasks:t html-postamble:t <:nil broken-links:mark 
+#+HTML_MATHJAX: align:center tagside:right font:Neo-Euler
+* Efficient note taking techniques
+** links
+[[https://www.youtube.com/watch?v=dQw4w9WgXcQ][Very Interesting Link]]
+** images
+#+HTML: <img src="./GOT.ico">
+* Latex functionality
+** Inline
+You can insert $c^2=a^2 + b^2$ in the middle of a sentence
+** Independant section (no numbers)
+$$V = \int_{\infty}^0 \vec{E} \cdot \vec{dx}$$
+** Independant section (numbered)
+\begin{equation}
+\label{eqn:1}
+W = \int_a^b F \cdot \vec{dx}
+\end{equation}
+Some writing in between before
+refering to Eq.$\ref{eqn:1}$
+** Matrix
+\begin{equation}
+\begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix}
+\end{equation}
+** toggle latex in org mode
++ C-c C-x C-l
++ use . to repeat through equations
++ use . on headings to do multiple
+* Code formatting
+** Insert code block
+toggle code block editting in org using C-c '
+Latex example
+#+NAME: Latex example
+#+BEGIN_SRC latex
+  $$V = \int_{\infty}^0 \vec{E} \cdot \vec{dx}$$
+#+END_SRC
+C++ code example
+#+NAME: C++ code
+#+BEGIN_SRC c++
+for(int i = 0; i<10; i++){
+  printf("Hello World!");
+}
+#+END_SRC
+** Some languages for syntax highlighting
+#+ATTR_HTML: :border 2 :rules all :frame border
+|--------+--------+------+------------|
+| C      | C++    | css  | java       |
+| js     | latex  | lisp | matlab     |
+| octave | org    | perl | processing |
+| python | R      | ruby | sh         |
+| sql    | sqlite | sed  |            |
+|--------+--------+------+------------|
+
+** Export code and/or results
+[[http://orgmode.org/manual/Exporting-code-blocks.html#Exporting-code-blocks][Exporting code arguments]]
+** Evaluate code blocks
+[[http://orgmode.org/manual/Evaluating-code-blocks.html#Evaluating-code-blocks][#+CALL: <name>(<arguments>)]]
+** shortcuts for code block insert
+* Code templates
+<<> <s> <TAB> completes the ‘src’ code block
+#+ATTR_HTML: :border 2 :rules all :frame border
+| letter | code block                            |
+|--------+---------------------------------------|
+| s      | #+BEGIN_SRC ... #+END_SRC             |
+| e      | #+BEGIN_EXAMPLE ... #+END_EXAMPLE     |
+| q      | #+BEGIN_QUOTE ... #+END_QUOTE         |
+| v      | #+BEGIN_VERSE ... #+END_VERSE         |
+| c      | #+BEGIN_CENTER ... #+END_CENTER       |
+| l      | #+BEGIN_EXPORT latex ... #+END_EXPORT |
+| L      | #+LATEX:                              |
+| h      | #+BEGIN_EXPORT html ... #+END_EXPORT  |
+| H      | #+HTML:                               |
+| a      | #+BEGIN_EXPORT ascii ... #+END_EXPORT |
+| A      | #+ASCII:                              |
+| i      | #+INDEX: line                         |
+| I      | #+INCLUDE: line                       |
+* Auto completion
+[[http://orgmode.org/manual/Completion.html#Completion][C-M-i key]]
+* Other Features
+[[http://orgmode.org/manual/The-very-busy-C_002dc-C_002dc-key.html#The-very-busy-C_002dc-C_002dc-key][C-c C-c key]]
+* Footnotes
+Haven't figured it out yet: [[http://orgmode.org/manual/Footnotes.html][footnotes]]
+* Pre-made Templates
+** Org header template
++ ./tools/Template.org
+* Using org to write a blog in Jekyll
+[[http://orgmode.org/worg/org-tutorials/org-jekyll.html][Org - Jekyll blog]]
