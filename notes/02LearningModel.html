@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>A Collection of Notes</title>
+<title>2 Learning Model</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Oishe Farhan" />
 <style type="text/css">
@@ -178,7 +178,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<title>Machine Learning</title> <h1 class="title"> <a href="./index.html">Machine Learning</a></h1>
+<h1 class="title"> <a href="../index.html">Machine Learning</a></h1>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -225,48 +225,98 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "Neo-Euler"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "Neo-Euler"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">A Collection of Notes</h1>
-<div class="org-center">
+<h1 class="title">2 Learning Model</h1>
+<div id="outline-container-org4d96bbd" class="outline-2">
+<h2 id="org4d96bbd"><span class="section-number-2">1</span> Model</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-org60dcf1b" class="outline-3">
+<h3 id="org60dcf1b"><span class="section-number-3">1.1</span> Notation</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">\(i\)</td>
+<td class="org-left">index</td>
+</tr>
+
+<tr>
+<td class="org-right">\(x^i\)</td>
+<td class="org-left">input variable</td>
+</tr>
+
+<tr>
+<td class="org-right">\(y^i\)</td>
+<td class="org-left">output variable</td>
+</tr>
+
+<tr>
+<td class="org-right">\((x^i,y^i)\)</td>
+<td class="org-left">training pair</td>
+</tr>
+
+<tr>
+<td class="org-right">\(i=1 \cdots m\)</td>
+<td class="org-left">list of \(m\) training pairs</td>
+</tr>
+
+<tr>
+<td class="org-right">\(X=Y=\Re\)</td>
+<td class="org-left">Input and output space vectors</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org15006f6" class="outline-3">
+<h3 id="org15006f6"><span class="section-number-3">1.2</span> Representation</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
-These are notes I generated from Coursera's <a href="https://www.coursera.org/learn/machine-learning/">Machine Learning Course</a>.<br />
-The code is written in Matlab/Octave to focus more on the concepts.<br />
+Given an input space vector \(X\) and an output space vector \(Y\), the hypothesis function \(h(x)\) is the best mapping from the input to the output \(h:X \rightarrow Y\).<br />
+As the figure indicates, the goal is to fing the best hypothesis function for any given input and output set of data.<br />
+</p>
+<img src="../img/01hypothesis.png">
+<p>
+Fig.1: Training model to find h(x) (courtesy of Coursera)<br />
 </p>
 </div>
-<div id="outline-container-org29b8f1b" class="outline-2">
-<h2 id="org29b8f1b">Table of Contents</h2>
-<div class="outline-text-2" id="text-org29b8f1b">
-<ol class="org-ol">
-<li><a href="./notes/01Introduction.html">Introduction</a><br /></li>
-<li><a href="./notes/02LearningModel.html">Learning Model</a><br /></li>
-<li><a href="./notes/03CostFunction.html">Cost Function</a><br /></li>
-<li><a href="./notes/04GradientDescent.html">Gradient Descent</a><br /></li>
-<li><a href="./notes/05LinearAlgebraReview">Linear Algebra Review</a><br /></li>
-</ol>
-</div>
-</div>
-<div id="outline-container-orgd6270bb" class="outline-2">
-<h2 id="orgd6270bb">Tools</h2>
-<div class="outline-text-2" id="text-orgd6270bb">
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=SzA2YODtgK4">Emac's Org Mode</a> to take notes<br /></li>
-<li><b><a href="./tools/OrgTutorial.html">Tutorial</a></b> for Org Mode and shortcuts<br /></li>
-<li><b><a href="./img/LatexSymbols.pdf">Latex</a></b> for equations<br /></li>
-<li><a href="http://docs.mathjax.org/en/latest/start.html">MathJax</a> to display Latex on html<br /></li>
-<li><a href="http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html">Exporting</a> to html using Org Mode<br /></li>
-<li><del><a href="http://pandoc.org/">Pandoc</a> to convert to html</del><br /></li>
-<li><del>Custom bash script to go from .org to .html</del><br /></li>
-</ul>
-
-<hr />
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Oishe Farhan (<a href="mailto:farhanoishe@gmail.com">farhanoishe@gmail.com</a>)</p>
-<p class="date">Date: August 17, 2017</p>
+<p class="date">Date: </p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

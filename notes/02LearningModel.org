@@ -1,0 +1,18 @@
+#+SETUPFILE: ../template.org
+#+TITLE:2 Learning Model
+* Model
+** Notation
+|            <r> | <l>                            |
+|            $i$ | index                          |
+|          $x^i$ | input variable                 |
+|          $y^i$ | output variable                |
+|    $(x^i,y^i)$ | training pair                  |
+| $i=1 \cdots m$ | list of $m$ training pairs     |
+|      $X=Y=\Re$ | Input and output space vectors |
+** Representation
+Given an input space vector $X$ and an output space vector $Y$, the hypothesis function $h(x)$ is the best mapping from the input to the output $h:X \rightarrow Y$.
+As the figure indicates, the goal is to fing the best hypothesis function for any given input and output set of data.
+#+HTML: <img src="../img/01hypothesis.png">
+Fig.1: Training model to find h(x) (courtesy of Coursera)
+  
+

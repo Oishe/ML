@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>A Collection of Notes</title>
+<title>3 Cost Function</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Oishe Farhan" />
 <style type="text/css">
@@ -178,7 +178,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<title>Machine Learning</title> <h1 class="title"> <a href="./index.html">Machine Learning</a></h1>
+<h1 class="title"> <a href="../index.html">Machine Learning</a></h1>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -225,48 +225,122 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "Neo-Euler"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "Neo-Euler"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
-<h1 class="title">A Collection of Notes</h1>
-<div class="org-center">
+<h1 class="title">3 Cost Function</h1>
+<div id="outline-container-orgc71922d" class="outline-2">
+<h2 id="orgc71922d"><span class="section-number-2">1</span> Defining the Cost Function</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-These are notes I generated from Coursera's <a href="https://www.coursera.org/learn/machine-learning/">Machine Learning Course</a>.<br />
-The code is written in Matlab/Octave to focus more on the concepts.<br />
+With our input data \(X\) and output data \(Y\), we want to predict the best hypothesis function \(h(x)\). For this we create a measure of accuracy called the cost function: \(J(\theta)\). The cost function can also be reffered to as the error function. We want to minimize the error to come up with an accurate hypothesis. For a simple one variable input and one variable output graph we can have a hypothesis with two coefficients.<br />
+</p>
+<table border="0" cellspacing="0" cellpadding="6">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">\(\theta_0\)</td>
+<td class="org-left">y-intercept</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">\(\theta_1\)</td>
+<td class="org-left">slope</td>
+</tr>
+
+<tr>
+<td class="org-right">\(h_\theta(x)=\)</td>
+<td class="org-left">\(\theta_0 +\theta_1x\)</td>
+<td class="org-left">Trend line</td>
+</tr>
+
+<tr>
+<td class="org-right">\( \hat{y}^i=\)</td>
+<td class="org-left">\(h_\theta(x^i)\)</td>
+<td class="org-left">Predicted output</td>
+</tr>
+</tbody>
+</table>
+
+<img src="../img/03costfunction.png" alt="costfunction">
+<p>
+Fig.1 Cost function intuition (courtesy of Coursera)<br />
+</p>
+
+<p>
+The cost function will look at the difference between the output data \(y_i\) and the predicted output \(\hat{y}_i\). It is squared to preserve the magnitude when added up and averaged for the cost of a given hypothesis. The \(\frac{1}{2}\) is there to make the derivate easier. Below is the cost function for the example above:<br />
+</p>
+\begin{align}
+J(\theta_0,\theta_1) &= \frac{1}{2m}\sum_{i=1}^m (\hat{y}^i-y^i)^2 \\
+                     &= \frac{1}{2m}\sum_{i=1}^m (h_\theta(x^i)-y^i)^2
+\end{align}
+</div>
+</div>
+
+<div id="outline-container-org7f1f1f8" class="outline-2">
+<h2 id="org7f1f1f8"><span class="section-number-2">2</span> Graphing Cost Function 1 variable</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+For a cost function with two parameters, we will draw the graph focusing on one parameter only \(\theta_1\). If we graph \(J(\theta_1)\) we'll see how the cost changes as we sweep through some values. The goal is to find the minimum point to minimize our cost/error.<br />
+</p>
+<img src="../img/03J1.png">
+<img src="../img/03J2.png">
+<img src="../img/03J3.png">
+<p>
+Fig.2 Examples of plotting \(J\) by changing \(h_\theta\) (courtesy of Coursera)<br />
 </p>
 </div>
-<div id="outline-container-org29b8f1b" class="outline-2">
-<h2 id="org29b8f1b">Table of Contents</h2>
-<div class="outline-text-2" id="text-org29b8f1b">
-<ol class="org-ol">
-<li><a href="./notes/01Introduction.html">Introduction</a><br /></li>
-<li><a href="./notes/02LearningModel.html">Learning Model</a><br /></li>
-<li><a href="./notes/03CostFunction.html">Cost Function</a><br /></li>
-<li><a href="./notes/04GradientDescent.html">Gradient Descent</a><br /></li>
-<li><a href="./notes/05LinearAlgebraReview">Linear Algebra Review</a><br /></li>
-</ol>
 </div>
-</div>
-<div id="outline-container-orgd6270bb" class="outline-2">
-<h2 id="orgd6270bb">Tools</h2>
-<div class="outline-text-2" id="text-orgd6270bb">
-<ul class="org-ul">
-<li><a href="https://www.youtube.com/watch?v=SzA2YODtgK4">Emac's Org Mode</a> to take notes<br /></li>
-<li><b><a href="./tools/OrgTutorial.html">Tutorial</a></b> for Org Mode and shortcuts<br /></li>
-<li><b><a href="./img/LatexSymbols.pdf">Latex</a></b> for equations<br /></li>
-<li><a href="http://docs.mathjax.org/en/latest/start.html">MathJax</a> to display Latex on html<br /></li>
-<li><a href="http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html">Exporting</a> to html using Org Mode<br /></li>
-<li><del><a href="http://pandoc.org/">Pandoc</a> to convert to html</del><br /></li>
-<li><del>Custom bash script to go from .org to .html</del><br /></li>
-</ul>
 
-<hr />
+<div id="outline-container-org6dfcefd" class="outline-2">
+<h2 id="org6dfcefd"><span class="section-number-2">3</span> Graphing Cost Function 2 variables</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+If we sweep over all the possible combinations of \( \theta_0\) and \( \theta_1\) for \(J(\theta_0, \theta_1)\), we get a 3-D plot. We can display this 3-D graph as a 2-D graphing using countour plots (similar to elevation charts). By finding the lowest point of our contour plot we can predict the best hypothesis function.<br />
+</p>
+
+<img src="../img/03J4.png">
+<p>
+Fig.3 Contour plot of \(J(\theta_0, \theta_1)\) with the best hypothesis<br />
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Oishe Farhan (<a href="mailto:farhanoishe@gmail.com">farhanoishe@gmail.com</a>)</p>
-<p class="date">Date: August 17, 2017</p>
+<p class="date">Date: </p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

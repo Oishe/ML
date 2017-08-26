@@ -1,0 +1,32 @@
+#+SETUPFILE: ../template.org
+#+TITLE:3 Cost Function
+* Defining the Cost Function
+With our input data $X$ and output data $Y$, we want to predict the best hypothesis function $h(x)$. For this we create a measure of accuracy called the cost function: $J(\theta)$. The cost function can also be reffered to as the error function. We want to minimize the error to come up with an accurate hypothesis. For a simple one variable input and one variable output graph we can have a hypothesis with two coefficients.
+#+ATTR_HTML: :border 0 :rules nil :frame nil
+|            <r> | <l>                   | <l>              |
+|                | $\theta_0$            | y-intercept      |
+|                | $\theta_1$            | slope            |
+| $h_\theta(x)=$ | $\theta_0 +\theta_1x$ | Trend line       |
+|  $ \hat{y}^i=$ | $h_\theta(x^i)$       | Predicted output |
+
+#+HTML: <img src="../img/03costfunction.png" alt="costfunction">
+Fig.1 Cost function intuition (courtesy of Coursera)
+
+The cost function will look at the difference between the output data $y_i$ and the predicted output $\hat{y}_i$. It is squared to preserve the magnitude when added up and averaged for the cost of a given hypothesis. The $\frac{1}{2}$ is there to make the derivate easier. Below is the cost function for the example above:
+\begin{align}
+J(\theta_0,\theta_1) &= \frac{1}{2m}\sum_{i=1}^m (\hat{y}^i-y^i)^2 \\
+                     &= \frac{1}{2m}\sum_{i=1}^m (h_\theta(x^i)-y^i)^2
+\end{align}
+
+* Graphing Cost Function 1 variable
+For a cost function with two parameters, we will draw the graph focusing on one parameter only $\theta_1$. If we graph $J(\theta_1)$ we'll see how the cost changes as we sweep through some values. The goal is to find the minimum point to minimize our cost/error.
+#+HTML: <img src="../img/03J1.png">
+#+HTML: <img src="../img/03J2.png">
+#+HTML: <img src="../img/03J3.png">
+Fig.2 Examples of plotting $J$ by changing $h_\theta$ (courtesy of Coursera)
+
+* Graphing Cost Function 2 variables
+If we sweep over all the possible combinations of $ \theta_0$ and $ \theta_1$ for $J(\theta_0, \theta_1)$, we get a 3-D plot. We can display this 3-D graph as a 2-D graphing using countour plots (similar to elevation charts). By finding the lowest point of our contour plot we can predict the best hypothesis function.
+
+#+HTML: <img src="../img/03J4.png">
+Fig.3 Contour plot of $J(\theta_0, \theta_1)$ with the best hypothesis

@@ -1,0 +1,25 @@
+#+SETUPFILE: ../template.org
+#+TITLE:1 Introduction
+* What is Machine Learning?
+A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.
+
+#+BEGIN_CENTER
+P = Performance
+T = Tasks
+E = Experiance
+#+END_CENTER
+$$P(T) \propto E$$
+
+* Types of Learning
+** Supervised Learning
+There is a given data set where the correct output is known. It is a matter of finding the relationship between the input and the output.
+*** Regression
++ Predicting results with continous output
++ Map input variables to a continous function
+*** Classification
++ Predicting results with discrete output
++ Map input variables to discrete categories
+** Unsupervised Learning
++ Problems with no idea what the results should look like
++ Derive strucutre from the data by clustering based on relationships among variables in the data
++ No feedback based on the prediction results
