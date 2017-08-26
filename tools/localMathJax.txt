@@ -1,0 +1,1 @@
+#+HTML_MATHJAX:  path:"../MathJax/MathJax.js?config=TeX-AMS_HTML"

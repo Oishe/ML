@@ -1,0 +1,8 @@
+#!/bin/bash
+set -ex
+# Exit when any line fails and print each command executed
+
+# User has to input all the files
+# Ex: exportBatch ./*.org
+
+emacs $1 --batch -f org-html-export-to-html --kill

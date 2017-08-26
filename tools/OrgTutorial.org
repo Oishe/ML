@@ -1,18 +1,10 @@
-#+TITLE:Machine Learning
-#+SUBTITLE: Org Mode Tutorial
-#+AUTHOR:Oishe Farhan
-#+EMAIL:farhanoishe@gmail.com
-#+DATE:August 17, 2017
-#+HTML_LINK_HOME: ../../index.html
-#+HTML_LINK_UP: ../../index.html
-#+OPTIONS: H:2 num:t timestamp:nil toc:t \n:t ::nil |:t ^:{} f:t tex:t 
-#+OPTIONS: tags:t todo:t tasks:t html-postamble:t <:nil broken-links:mark 
-#+HTML_MATHJAX: align:center tagside:right font:Neo-Euler
+#+SETUPFILE: ../template.org
+#+TITLE:Org Mode Tutorial
 * Efficient note taking techniques
 ** links
 [[https://www.youtube.com/watch?v=dQw4w9WgXcQ][Very Interesting Link]]
 ** images
-#+HTML: <img src="./GOT.ico">
+#+HTML: <img src="../img/GOT.ico">
 * Latex functionality
 ** Inline
 You can insert $c^2=a^2 + b^2$ in the middle of a sentence
@@ -93,6 +85,6 @@ for(int i = 0; i<10; i++){
 Haven't figured it out yet: [[http://orgmode.org/manual/Footnotes.html][footnotes]]
 * Pre-made Templates
 ** Org header template
-+ ./tools/Template.org
++ ../template.org
 * Using org to write a blog in Jekyll
 [[http://orgmode.org/worg/org-tutorials/org-jekyll.html][Org - Jekyll blog]]
