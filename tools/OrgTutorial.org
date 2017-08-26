@@ -62,21 +62,21 @@ for(int i = 0; i<10; i++){
 * Code templates
 <<> <s> <TAB> completes the ‘src’ code block
 #+ATTR_HTML: :border 2 :rules all :frame border
-| letter | code block                            |
-|--------+---------------------------------------|
-| s      | #+BEGIN_SRC ... #+END_SRC             |
-| e      | #+BEGIN_EXAMPLE ... #+END_EXAMPLE     |
-| q      | #+BEGIN_QUOTE ... #+END_QUOTE         |
-| v      | #+BEGIN_VERSE ... #+END_VERSE         |
-| c      | #+BEGIN_CENTER ... #+END_CENTER       |
-| l      | #+BEGIN_EXPORT latex ... #+END_EXPORT |
-| L      | #+LATEX:                              |
-| h      | #+BEGIN_EXPORT html ... #+END_EXPORT  |
-| H      | #+HTML:                               |
-| a      | #+BEGIN_EXPORT ascii ... #+END_EXPORT |
-| A      | #+ASCII:                              |
-| i      | #+INDEX: line                         |
-| I      | #+INCLUDE: line                       |
+| letter | code block                              |
+|--------+-----------------------------------------|
+| s      | #+BEGIN _SRC ... #+END _SRC             |
+| e      | #+BEGIN _EXAMPLE ... #+END _EXAMPLE     |
+| q      | #+BEGIN _QUOTE ... #+END _QUOTE         |
+| v      | #+BEGIN _VERSE ... #+END _VERSE         |
+| c      | #+BEGIN _CENTER ... #+END _CENTER       |
+| l      | #+BEGIN _EXPORT latex ... #+END _EXPORT |
+| L      | #+LATEX:                                |
+| h      | #+BEGIN _EXPORT html ... #+END _EXPORT  |
+| H      | #+HTML:                                 |
+| a      | #+BEGIN _EXPORT ascii ... #+END _EXPORT |
+| A      | #+ASCII:                                |
+| i      | #+INDEX: line                           |
+| I      | #+INCLUDE: line                         |
 * Auto completion
 [[http://orgmode.org/manual/Completion.html#Completion][C-M-i key]]
 * Other Features
