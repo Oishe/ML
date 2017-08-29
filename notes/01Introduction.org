@@ -2,14 +2,12 @@
 #+TITLE:1 Introduction
 * What is Machine Learning?
 A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.
-
-#+BEGIN_CENTER
-P = Performance
-T = Tasks
-E = Experiance
-#+END_CENTER
-$$P(T) \propto E$$
-
+\begin{align*}
+\text{P} &= \text{Performance} \\
+\text{T} &= \text{Tasks} \\
+\text{E} &= \text{Experiance} \\
+&P(T) \propto E
+\end{align*}
 * Types of Learning
 ** Supervised Learning
 There is a given data set where the correct output is known. It is a matter of finding the relationship between the input and the output.
