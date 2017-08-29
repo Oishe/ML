@@ -1,0 +1,96 @@
+#+SETUPFILE: ../template.org
+#+TITLE:4 Gradient Descent
+* Minimizing Problem
+It can be used to minimize any general function. We'll start with a 3-D case from previous examples. We want to find the minimum value of our function:
+$$\min_{\theta_0, \theta_0} \rightarrow J(\theta_0 \theta_1)$$
+* General Steps
+1. Start at some point $(\theta_0, \theta_0)$
+2. Find the vector that points in the direction of the minimum
+3. Change $\theta_0, \theta_0$ towards the minimum until you reach it
+By changing the starting location the gradient descent could give different results. There are local minimums and a single absolute global minimum. Beware that sometimes you'll find a local minimum and not the actual global minimum.
+#+HTML: <img src="../img/04Descent.png">
+Fig.1 One example of a Gradient Descent (courtesy of Coursera)
+* Terms
+Rules followed by Coursera course.
+#+ATTR_HTML: :border 0 :frame 0 :rules all
+|                           Operator | Description           |
+|------------------------------------+-----------------------|
+|                                <r> | <l>                   |
+|                               $:=$ | Assignment operator   |
+|                                $=$ | Mathematical equality |
+| $\frac{\partial}{\partial \theta}$ | Partial derivative    |
+|                           $\alpha$ | Learning rate         |
+* Intuition
+The slope of one of the variables, $\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)$ tells us how fast $J(\theta_0\theta_1)$ increases.
+#+ATTR_HTML: :border 0 :frame 0 :rules all
+| Slope    | Direction of increase | Direction to minimum |
+| <l>      |                   <r> |                  <r> |
+|----------+-----------------------+----------------------|
+| positive |          + $\theta_j$ |         - $\theta_j$ |
+| negative |          - $\theta_j$ |         + $\theta_j$ |
+#+HTML: <img src="../img/04slope.png">
+Fig.2 Direction to minimum (courtesy of Coursera)
+
+Therefore to get to the minimum it is crucial that we *SUBTRACT* the rate of change from our starting point to get to the minimum.
+* Algorithm
+
+\begin{align}
+\nonumber \text{repeat until convergence: } \lbrace & \\
+&\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
+\nonumber \rbrace &
+\end{align}
+
+*NOTE*: It is important to simultaneously update the variables together before actually incrementing the variables.
+#+HTML: <img src="../img/04Simultaneous.png">
+Fig.3 Simultaneous Updates (courtesy of Coursera)
+
+* Learning Rate
+We can adjust $\alpha$ to increase or decrease the step size. We want larger values of $\alpha$ for a faster learning rate however we don't want to overshoot.
+
+#+HTML: <img src="../img/04LearningRate.png">
+Fig.4 Learning rate and overshoot (courtesy of Coursera)
+
+* Gradient Descent Example: Linear Regression
+Let's simplify what gradient descent looks like for a 2-parameter hypothesis
+** Known equations
+| <l>               | <c>                                                                                    |
+| Training set      | $(x^i,y^i)$                                                                            |
+| Free parameters   | $\theta_0,\theta_1$                                                                    |
+| Linear hypothesis | $h_\theta(x^i)=\theta_0 + \theta_1 x^i$                                                |
+| Cost function     | $J(\theta_0,\theta_1) = \frac{1}{2m}\sum_{i=1}^m (h_\theta(x^i)-y^i)^2$                |
+| Algorithm         | $\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)$ |
+** Combining Equations
+Solving for the partial derivative:
+\begin{align*}
+\frac{\partial}{\partial \theta_j} J(\theta_0,\theta_1) &= \frac{1}{2m} \frac{\partial}{\partial \theta_j} \sum_{i=1}^m (h_\theta(x^i)-y^i)^2 \\
+&= \frac{1}{2m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j} (h_\theta(x^i)-y^i)^2 \\
+&= \frac{1}{m} \sum_{i=1}^m  (h_\theta(x^i)-y^i) \cdot \frac{\partial h_\theta}{\partial \theta_j} \\
+\end{align*}
+
+\begin{align*} 
+h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
+\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\ 
+\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\ 
+\end{align*}
+
+** Simplified algorithm
+
+\begin{align*}
+\text{repeat until convergence: } \lbrace & \newline
+\theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x^{i}) - y^{i}) x^{i}\right) \newline
+\rbrace &
+\end{align*}
+* Multivariable Linear Regression
+This is the general case with multiple input variables $x_1, x_2, \cdots, x_n$.
+** Linear Hypothesis
+$$h_\theta(x)=\sum_{j=0}^n\theta_j x_j \> ;\qquad x_0=1$$
+** Cost function
+$$J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2$$
+** Partial derivative of the cost function
+\begin{align*}
+\frac{\partial}{\partial \theta_j}J(\theta) &= \frac{1}{2m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j} (h_\theta(x)-y)^2 \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}h_\theta (x) \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}\sum_{j=0}^n\theta_j x_j \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\end{align*}

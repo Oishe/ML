@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4 Gradient Descent</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Oishe Farhan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<h1 class="title"> <a href="../index.html">Machine Learning</a></h1>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "Neo-Euler"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "Neo-Euler"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">4 Gradient Descent</h1>
+<div id="outline-container-org4d858e2" class="outline-2">
+<h2 id="org4d858e2"><span class="section-number-2">1</span> Minimizing Problem</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+It can be used to minimize any general function. We'll start with a 3-D case from previous examples. We want to find the minimum value of our function:<br />
+\[\min_{\theta_0, \theta_0} \rightarrow J(\theta_0 \theta_1)\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orga49610c" class="outline-2">
+<h2 id="orga49610c"><span class="section-number-2">2</span> General Steps</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>Start at some point \((\theta_0, \theta_0)\)<br /></li>
+<li>Find the vector that points in the direction of the minimum<br /></li>
+<li>Change \(\theta_0, \theta_0\) towards the minimum until you reach it<br /></li>
+</ol>
+<p>
+By changing the starting location the gradient descent could give different results. There are local minimums and a single absolute global minimum. Beware that sometimes you'll find a local minimum and not the actual global minimum.<br />
+</p>
+<img src="../img/04Descent.png">
+<p>
+Fig.1 One example of a Gradient Descent (courtesy of Coursera)<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org25661b6" class="outline-2">
+<h2 id="org25661b6"><span class="section-number-2">3</span> Terms</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Rules followed by Coursera course.<br />
+</p>
+<table border="0" cellspacing="0" cellpadding="6" rules="all" frame="0">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Operator</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">\(:=\)</td>
+<td class="org-left">Assignment operator</td>
+</tr>
+
+<tr>
+<td class="org-right">\(=\)</td>
+<td class="org-left">Mathematical equality</td>
+</tr>
+
+<tr>
+<td class="org-right">\(\frac{\partial}{\partial \theta}\)</td>
+<td class="org-left">Partial derivative</td>
+</tr>
+
+<tr>
+<td class="org-right">\(\alpha\)</td>
+<td class="org-left">Learning rate</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org5723daa" class="outline-2">
+<h2 id="org5723daa"><span class="section-number-2">4</span> Intuition</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The slope of one of the variables, \(\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)\) tells us how fast \(J(\theta_0\theta_1)\) increases.<br />
+</p>
+<table border="0" cellspacing="0" cellpadding="6" rules="all" frame="0">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Slope</th>
+<th scope="col" class="org-right">Direction of increase</th>
+<th scope="col" class="org-right">Direction to minimum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">positive</td>
+<td class="org-right">+ \(\theta_j\)</td>
+<td class="org-right">- \(\theta_j\)</td>
+</tr>
+
+<tr>
+<td class="org-left">negative</td>
+<td class="org-right">- \(\theta_j\)</td>
+<td class="org-right">+ \(\theta_j\)</td>
+</tr>
+</tbody>
+</table>
+<img src="../img/04slope.png">
+<p>
+Fig.2 Direction to minimum (courtesy of Coursera)<br />
+</p>
+
+<p>
+Therefore to get to the minimum it is crucial that we <b>SUBTRACT</b> the rate of change from our starting point to get to the minimum.<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org7b5ef59" class="outline-2">
+<h2 id="org7b5ef59"><span class="section-number-2">5</span> Algorithm</h2>
+<div class="outline-text-2" id="text-5">
+\begin{align}
+\nonumber \text{repeat until convergence: } \lbrace & \\
+&\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
+\nonumber \rbrace &
+\end{align}
+
+<p>
+<b>NOTE</b>: It is important to simultaneously update the variables together before actually incrementing the variables.<br />
+</p>
+<img src="../img/04Simultaneous.png">
+<p>
+Fig.3 Simultaneous Updates (courtesy of Coursera)<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7c19788" class="outline-2">
+<h2 id="org7c19788"><span class="section-number-2">6</span> Learning Rate</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+We can adjust \(\alpha\) to increase or decrease the step size. We want larger values of \(\alpha\) for a faster learning rate however we don't want to overshoot.<br />
+</p>
+
+<img src="../img/04LearningRate.png">
+<p>
+Fig.4 Learning rate and overshoot (courtesy of Coursera)<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga0522d4" class="outline-2">
+<h2 id="orga0522d4"><span class="section-number-2">7</span> Gradient Descent Example: Linear Regression</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Let's simplify what gradient descent looks like for a 2-parameter hypothesis<br />
+</p>
+</div>
+<div id="outline-container-org5736d1a" class="outline-3">
+<h3 id="org5736d1a"><span class="section-number-3">7.1</span> Known equations</h3>
+<div class="outline-text-3" id="text-7-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-center" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Training set</td>
+<td class="org-center">\((x^i,y^i)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Free parameters</td>
+<td class="org-center">\(\theta_0,\theta_1\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Linear hypothesis</td>
+<td class="org-center">\(h_\theta(x^i)=\theta_0 + \theta_1 x^i\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Cost function</td>
+<td class="org-center">\(J(\theta_0,\theta_1) = \frac{1}{2m}\sum_{i=1}^m (h_\theta(x^i)-y^i)^2\)</td>
+</tr>
+
+<tr>
+<td class="org-left">Algorithm</td>
+<td class="org-center">\(\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgcd4960e" class="outline-3">
+<h3 id="orgcd4960e"><span class="section-number-3">7.2</span> Combining Equations</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Solving for the partial derivative:<br />
+</p>
+\begin{align*}
+\frac{\partial}{\partial \theta_j} J(\theta_0,\theta_1) &= \frac{1}{2m} \frac{\partial}{\partial \theta_j} \sum_{i=1}^m (h_\theta(x^i)-y^i)^2 \\
+&= \frac{1}{2m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j} (h_\theta(x^i)-y^i)^2 \\
+&= \frac{1}{m} \sum_{i=1}^m  (h_\theta(x^i)-y^i) \cdot \frac{\partial h_\theta}{\partial \theta_j} \\
+\end{align*}
+
+\begin{align*} 
+h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
+\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\ 
+\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\ 
+\end{align*}
+</div>
+</div>
+
+<div id="outline-container-orga5638c6" class="outline-3">
+<h3 id="orga5638c6"><span class="section-number-3">7.3</span> Simplified algorithm</h3>
+<div class="outline-text-3" id="text-7-3">
+\begin{align*}
+\text{repeat until convergence: } \lbrace & \newline
+\theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x^{i}) - y^{i}) x^{i}\right) \newline
+\rbrace &
+\end{align*}
+</div>
+</div>
+</div>
+<div id="outline-container-orga850a31" class="outline-2">
+<h2 id="orga850a31"><span class="section-number-2">8</span> Multivariable Linear Regression</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+This is the general case with multiple input variables \(x_1, x_2, \cdots, x_n\).<br />
+</p>
+</div>
+<div id="outline-container-org109e662" class="outline-3">
+<h3 id="org109e662"><span class="section-number-3">8.1</span> Linear Hypothesis</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+\[h_\theta(x)=\sum_{j=0}^n\theta_j x_j \> ;\qquad x_0=1\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org7105d0a" class="outline-3">
+<h3 id="org7105d0a"><span class="section-number-3">8.2</span> Cost function</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+\[J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2\]<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org580cd83" class="outline-3">
+<h3 id="org580cd83"><span class="section-number-3">8.3</span> Partial derivative of the cost function</h3>
+<div class="outline-text-3" id="text-8-3">
+\begin{align*}
+\frac{\partial}{\partial \theta_j}J(\theta) &= \frac{1}{2m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j} (h_\theta(x)-y)^2 \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}h_\theta (x) \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}\sum_{j=0}^n\theta_j x_j \\
+&= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\end{align*}
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Oishe Farhan (<a href="mailto:farhanoishe@gmail.com">farhanoishe@gmail.com</a>)</p>
+<p class="date">Date: </p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 9.0.9)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
