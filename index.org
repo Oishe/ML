@@ -2,9 +2,11 @@
 #+EMAIL:farhanoishe@gmail.com
 #+DATE:August 17, 2017
 #+TITLE:A Collection of Notes
-#+HTML_HEAD: <title>Machine Learning</title> <h1 class="title"> <a href="./index.html">Machine Learning</a></h1>
+#+HTML_HEAD: <h1 class="titleTOP"> <a href="./index.html">Machine Learning</a></h1>
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./css/style1.css" />
 #+OPTIONS: title:t H:3 num:nil timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t
 #+OPTIONS: stat:t tags:t todo:nil tasks:nil html-postamble:t <:nil broken-links:mark
+#+OPTIONS: html-style:nil
 #+HTML_MATHJAX: align:center tagside:right font:Neo-Euler
 #+BEGIN_CENTER
 These are notes I generated from Coursera's [[https://www.coursera.org/learn/machine-learning/][Machine Learning Course]].
