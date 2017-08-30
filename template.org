@@ -5,4 +5,4 @@
 #+OPTIONS: H:3 num:t timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t 
 #+OPTIONS: tags:t todo:t tasks:t html-postamble:t <:nil broken-links:mark 
 #+OPTIONS: date:nil html-style:nil
-#+HTML_MATHJAX: align:center tagside:right font:Neo-Euler
+#+HTML_MATHJAX: align:center tagside:right font:Neo-Euler path="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"
