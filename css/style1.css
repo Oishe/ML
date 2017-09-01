@@ -1,12 +1,15 @@
-title{
-  text-align: center;
+.titleTOP{
+  text-align:center;
 }
-#titleTOP {
-  
+
+.title{
+  text-align:center;
 }
+
 body {
   background-color:white;
   color:black;
-  margin:20px 50px;
+  margin:1% 4%;
   border-style:outset;
+  padding:1% 1%; 
 }
