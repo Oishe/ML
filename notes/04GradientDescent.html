@@ -82,8 +82,8 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">4 Gradient Descent</h1>
-<div id="outline-container-org3e51d27" class="outline-2">
-<h2 id="org3e51d27"><span class="section-number-2">1</span> Minimizing Problem</h2>
+<div id="outline-container-org5a2b894" class="outline-2">
+<h2 id="org5a2b894"><span class="section-number-2">1</span> Minimizing Problem</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 It can be used to minimize any general function. We'll start with a 3-D case from previous examples. We want to find the minimum value of our function:<br />
@@ -91,8 +91,8 @@ It can be used to minimize any general function. We'll start with a 3-D case fro
 </p>
 </div>
 </div>
-<div id="outline-container-org5850495" class="outline-2">
-<h2 id="org5850495"><span class="section-number-2">2</span> General Steps</h2>
+<div id="outline-container-orgc06ae0d" class="outline-2">
+<h2 id="orgc06ae0d"><span class="section-number-2">2</span> General Steps</h2>
 <div class="outline-text-2" id="text-2">
 <ol class="org-ol">
 <li>Start at some point \((\theta_0, \theta_0)\)<br /></li>
@@ -108,8 +108,8 @@ Fig.1 One example of a Gradient Descent (courtesy of Coursera)<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgb00da00" class="outline-2">
-<h2 id="orgb00da00"><span class="section-number-2">3</span> Terms</h2>
+<div id="outline-container-orge79f026" class="outline-2">
+<h2 id="orge79f026"><span class="section-number-2">3</span> Terms</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Rules followed by Coursera course.<br />
@@ -152,8 +152,8 @@ Rules followed by Coursera course.<br />
 </table>
 </div>
 </div>
-<div id="outline-container-orgd379c2f" class="outline-2">
-<h2 id="orgd379c2f"><span class="section-number-2">4</span> Intuition</h2>
+<div id="outline-container-orgefdc730" class="outline-2">
+<h2 id="orgefdc730"><span class="section-number-2">4</span> Intuition</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The slope of one of the variables, \(\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)\) tells us how fast \(J(\theta_0\theta_1)\) increases.<br />
@@ -199,12 +199,12 @@ Therefore to get to the minimum it is crucial that we <b>SUBTRACT</b> the rate o
 </p>
 </div>
 </div>
-<div id="outline-container-org48883c2" class="outline-2">
-<h2 id="org48883c2"><span class="section-number-2">5</span> Algorithm</h2>
+<div id="outline-container-orga060b13" class="outline-2">
+<h2 id="orga060b13"><span class="section-number-2">5</span> Algorithm</h2>
 <div class="outline-text-2" id="text-5">
 \begin{align}
 \nonumber \text{repeat until convergence: } \lbrace & \\
-&\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
+\theta_j &:= \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
 \nonumber \rbrace &
 \end{align}
 
@@ -218,8 +218,8 @@ Fig.3 Simultaneous Updates (courtesy of Coursera)<br />
 </div>
 </div>
 
-<div id="outline-container-orgc721f33" class="outline-2">
-<h2 id="orgc721f33"><span class="section-number-2">6</span> Learning Rate</h2>
+<div id="outline-container-org236b196" class="outline-2">
+<h2 id="org236b196"><span class="section-number-2">6</span> Learning Rate</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 We can adjust \(\alpha\) to increase or decrease the step size. We want larger values of \(\alpha\) for a faster learning rate however we don't want to overshoot.<br />
@@ -232,15 +232,15 @@ Fig.4 Learning rate and overshoot (courtesy of Coursera)<br />
 </div>
 </div>
 
-<div id="outline-container-orgc1332e2" class="outline-2">
-<h2 id="orgc1332e2"><span class="section-number-2">7</span> Gradient Descent Example: Linear Regression</h2>
+<div id="outline-container-orgba87a4c" class="outline-2">
+<h2 id="orgba87a4c"><span class="section-number-2">7</span> Gradient Descent Example: Linear Regression</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Let's simplify what gradient descent looks like for a 2-parameter hypothesis<br />
 </p>
 </div>
-<div id="outline-container-orgf973ea5" class="outline-3">
-<h3 id="orgf973ea5"><span class="section-number-3">7.1</span> Known equations</h3>
+<div id="outline-container-orgccef61c" class="outline-3">
+<h3 id="orgccef61c"><span class="section-number-3">7.1</span> Known equations</h3>
 <div class="outline-text-3" id="text-7-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -279,8 +279,8 @@ Let's simplify what gradient descent looks like for a 2-parameter hypothesis<br 
 </table>
 </div>
 </div>
-<div id="outline-container-org733efe3" class="outline-3">
-<h3 id="org733efe3"><span class="section-number-3">7.2</span> Combining Equations</h3>
+<div id="outline-container-orgc260bcb" class="outline-3">
+<h3 id="orgc260bcb"><span class="section-number-3">7.2</span> Combining equations</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Solving for the partial derivative:<br />
@@ -299,49 +299,59 @@ h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
 </div>
 </div>
 
-<div id="outline-container-orgec687ac" class="outline-3">
-<h3 id="orgec687ac"><span class="section-number-3">7.3</span> Simplified algorithm</h3>
+<div id="outline-container-orgcf8eaea" class="outline-3">
+<h3 id="orgcf8eaea"><span class="section-number-3">7.3</span> Simplified algorithm</h3>
 <div class="outline-text-3" id="text-7-3">
 \begin{align*}
 \text{repeat until convergence: } \lbrace & \newline
-\theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
-\theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x^{i}) - y^{i}) x^{i}\right) \newline
+\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_1 := & \theta_1 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) x^{i} \newline
 \rbrace &
 \end{align*}
 </div>
 </div>
 </div>
-<div id="outline-container-orgd1e2ca6" class="outline-2">
-<h2 id="orgd1e2ca6"><span class="section-number-2">8</span> Multivariable Linear Regression</h2>
+<div id="outline-container-orgcd1af9c" class="outline-2">
+<h2 id="orgcd1af9c"><span class="section-number-2">8</span> Multivariable Linear Regression</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 This is the general case with multiple input variables \(x_1, x_2, \cdots, x_n\).<br />
 </p>
 </div>
-<div id="outline-container-org469b7d2" class="outline-3">
-<h3 id="org469b7d2"><span class="section-number-3">8.1</span> Linear Hypothesis</h3>
+<div id="outline-container-org0a27c68" class="outline-3">
+<h3 id="org0a27c68"><span class="section-number-3">8.1</span> Linear hypothesis</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 \[h_\theta(x)=\sum_{j=0}^n\theta_j x_j \> ;\qquad x_0=1\]<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6e36f3" class="outline-3">
-<h3 id="orgf6e36f3"><span class="section-number-3">8.2</span> Cost function</h3>
+<div id="outline-container-orgac24bdd" class="outline-3">
+<h3 id="orgac24bdd"><span class="section-number-3">8.2</span> Cost function</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 \[J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2\]<br />
 </p>
 </div>
 </div>
-<div id="outline-container-org5786645" class="outline-3">
-<h3 id="org5786645"><span class="section-number-3">8.3</span> Partial derivative of the cost function</h3>
+<div id="outline-container-org2327c48" class="outline-3">
+<h3 id="org2327c48"><span class="section-number-3">8.3</span> Partial derivative of the cost function</h3>
 <div class="outline-text-3" id="text-8-3">
 \begin{align*}
 \frac{\partial}{\partial \theta_j}J(\theta) &= \frac{1}{2m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j} (h_\theta(x)-y)^2 \\
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}h_\theta (x) \\
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}\sum_{j=0}^n\theta_j x_j \\
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\end{align*}
+</div>
+</div>
+<div id="outline-container-org23a6282" class="outline-3">
+<h3 id="org23a6282"><span class="section-number-3">8.4</span> General algorithm</h3>
+<div class="outline-text-3" id="text-8-4">
+\begin{align*}
+\text{repeat until convergence: } \lbrace & \newline
+\theta_j := & \theta_j - \frac{\alpha}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\rbrace &
 \end{align*}
 </div>
 </div>

@@ -36,7 +36,7 @@ Therefore to get to the minimum it is crucial that we *SUBTRACT* the rate of cha
 
 \begin{align}
 \nonumber \text{repeat until convergence: } \lbrace & \\
-&\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
+\theta_j &:= \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1) \qquad for \quad j=0,1 \\
 \nonumber \rbrace &
 \end{align}
 
@@ -59,7 +59,7 @@ Let's simplify what gradient descent looks like for a 2-parameter hypothesis
 | Linear hypothesis | $h_\theta(x^i)=\theta_0 + \theta_1 x^i$                                                |
 | Cost function     | $J(\theta_0,\theta_1) = \frac{1}{2m}\sum_{i=1}^m (h_\theta(x^i)-y^i)^2$                |
 | Algorithm         | $\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1)$ |
-** Combining Equations
+** Combining equations
 Solving for the partial derivative:
 \begin{align*}
 \frac{\partial}{\partial \theta_j} J(\theta_0,\theta_1) &= \frac{1}{2m} \frac{\partial}{\partial \theta_j} \sum_{i=1}^m (h_\theta(x^i)-y^i)^2 \\
@@ -77,13 +77,13 @@ h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
 
 \begin{align*}
 \text{repeat until convergence: } \lbrace & \newline
-\theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
-\theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x^{i}) - y^{i}) x^{i}\right) \newline
+\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_1 := & \theta_1 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) x^{i} \newline
 \rbrace &
 \end{align*}
 * Multivariable Linear Regression
 This is the general case with multiple input variables $x_1, x_2, \cdots, x_n$.
-** Linear Hypothesis
+** Linear hypothesis
 $$h_\theta(x)=\sum_{j=0}^n\theta_j x_j \> ;\qquad x_0=1$$
 ** Cost function
 $$J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2$$
@@ -93,4 +93,10 @@ $$J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2$$
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}h_\theta (x) \\
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot \frac{\partial}{\partial \theta_j}\sum_{j=0}^n\theta_j x_j \\
 &= \frac{1}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\end{align*}
+** General algorithm
+\begin{align*}
+\text{repeat until convergence: } \lbrace & \newline
+\theta_j := & \theta_j - \frac{\alpha}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
+\rbrace &
 \end{align*}
