@@ -1,14 +1,27 @@
 SHELL:= /bin/zsh
 CSS:= css/style1.css
-INDEX:=index.org
+INDEX=index.org
+INDEXHTML=$(INDEX:.org=.html)
 NOTES:=notes
-ORGS:=*.org
+ORG=*.org
+ORGHTML=$(ORG:.org=.html)
 
 all:
-	emacs $(INDEX) --batch -f org-html-expot-to-html --kill; \
+	echo ------------- $(INDEX) ---------------; \
+	emacs $(INDEX) --batch -f org-html-export-to-html --kill; \
+	vim -c '$d' -c "wq" $(INDEXHTML); \
+	cat ./postamble.txt >> $(INDEXHTML)\
+	echo "</html>" >> $(INDEXHTML); \
 	cd $(NOTES); \
-	for i in $(ORGS); do \
-		emacs $$i --batch -f org-html-expot-to-html --kill; \
+	for i in $(ORG); do \
+		echo ------------- $$i ---------------; \
+		emacs ./$$i --batch -f org-html-export-to-html --kill; \
+	done; \
+	for i in $(ORGHTML); do \
+		echo ------------- $$i ---------------; \
+		vim -c '$d' -c "wq" $$i; \
+		cat ../postamble.txt >> $$i; \
+		echo "</html>" >> $$i; \
 	done; \
 	cd ..
 

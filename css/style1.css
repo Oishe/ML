@@ -6,10 +6,17 @@
   text-align:center;
 }
 
+.center{
+  text-align:center;
+}
 body {
   background-color:white;
   color:black;
   margin:1% 4%;
   border-style:outset;
   padding:1% 1%; 
+}
+
+#postamble{
+  margin-top:5px;
 }

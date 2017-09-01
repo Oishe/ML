@@ -2,7 +2,7 @@
 #+EMAIL:farhanoishe@gmail.com
 #+HTML_HEAD: <h1 class="titleTOP"> <a href="../index.html">Machine Learning</a></h1>
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/style1.css" />
-#+OPTIONS: H:3 num:t timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t 
-#+OPTIONS: tags:t todo:t tasks:t html-postamble:t <:nil broken-links:mark 
-#+OPTIONS: date:nil html-style:nil
+#+OPTIONS: title:t H:3 num:t timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t tags:t
+#+OPTIONS: todo:t tasks:t <:nil broken-links:mark date:nil html-style:t 
+#+OPTIONS: date:nil html-postamble:nil
 #+HTML_MATHJAX: align:center tagside:right font:Neo-Euler path="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"

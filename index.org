@@ -1,17 +1,13 @@
 #+AUTHOR:Oishe Farhan
 #+EMAIL:farhanoishe@gmail.com
-#+DATE:August 17, 2017
-#+TITLE:A Collection of Notes
 #+HTML_HEAD: <h1 class="titleTOP"> <a href="./index.html">Machine Learning</a></h1>
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="./css/style1.css" />
-#+OPTIONS: title:t H:3 num:nil timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t
-#+OPTIONS: stat:t tags:t todo:nil tasks:nil html-postamble:t <:nil broken-links:mark
-#+OPTIONS: html-style:nil
+#+OPTIONS: title:t H:3 num:t timestamp:nil toc:nil \n:t ::nil |:t ^:{} f:t tex:t tags:t
+#+OPTIONS: todo:t tasks:t <:nil broken-links:mark date:nil html-style:t 
+#+OPTIONS: date:nil html-postamble:nil
 #+HTML_MATHJAX: align:center tagside:right font:Neo-Euler path="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"
-#+BEGIN_CENTER
-These are notes I generated from Coursera's [[https://www.coursera.org/learn/machine-learning/][Machine Learning Course]].
-The code is written in Matlab/Octave to focus more on the concepts.
-#+END_CENTER
+#+TITLE:A Collection of Notes
+#+HTML: <p class="center"> These are notes I generated from Coursera's <a href="https://www.coursera.org/learn/machine-learning/">Machine Learning Course</a>. The code is written in Matlab/Octave to focus more on the concepts.</p>
 * Table of Contents
 1. [[./notes/01Introduction.html][Introduction]]
 2. [[./notes/02LearningModel.org][Learning Model]]
@@ -26,5 +22,3 @@ The code is written in Matlab/Octave to focus more on the concepts.
 + [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html][Exporting]] to html using Org Mode
 + +[[http://pandoc.org/][Pandoc]] to convert to html+
 + +Custom bash script to go from .org to .html+
-
-------
