@@ -14,5 +14,3 @@ Given an input space vector $X$ and an output space vector $Y$, the hypothesis f
 As the figure indicates, the goal is to fing the best hypothesis function for any given input and output set of data.
 #+HTML: <img src="../img/01hypothesis.png">
 Fig.1: Training model to find h(x) (courtesy of Coursera)
-  
-
