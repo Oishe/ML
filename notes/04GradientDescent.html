@@ -393,10 +393,10 @@ Solving for the partial derivative:<br  />
 &= \frac{1}{m} \sum_{i=1}^m  (h_\theta(x^i)-y^i) \cdot \frac{\partial h_\theta}{\partial \theta_j} \\
 \end{align*}
 
-\begin{align*} 
+\begin{align*}
 h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
-\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\ 
-\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\ 
+\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\
+\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\
 \end{align*}
 </div>
 </div>
@@ -406,7 +406,7 @@ h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
 <div class="outline-text-3" id="text-7-3">
 \begin{align*}
 \text{repeat until convergence: } \lbrace & \newline
-\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline
 \theta_1 := & \theta_1 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) x^{i} \newline
 \rbrace &
 \end{align*}

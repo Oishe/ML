@@ -1,4 +1,4 @@
-#+SETUPFILE: ../template.org
+#+SETUPFILE: ../tools/template.org
 #+TITLE:4 Gradient Descent
 * Minimizing Problem
 It can be used to minimize any general function. We'll start with a 3-D case from previous examples. We want to find the minimum value of our function:
@@ -67,17 +67,17 @@ Solving for the partial derivative:
 &= \frac{1}{m} \sum_{i=1}^m  (h_\theta(x^i)-y^i) \cdot \frac{\partial h_\theta}{\partial \theta_j} \\
 \end{align*}
 
-\begin{align*} 
+\begin{align*}
 h_\theta(x^i)&=\theta_0 + \theta_1 x^i \\
-\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\ 
-\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\ 
+\frac{\partial h_\theta}{\partial \theta_0} &= 1 \\
+\frac{\partial h_\theta}{\partial \theta_1} &= x^i \\
 \end{align*}
 
 ** Simplified algorithm
 
 \begin{align*}
 \text{repeat until convergence: } \lbrace & \newline
-\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline 
+\theta_0 := & \theta_0 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) \newline
 \theta_1 := & \theta_1 - \frac{\alpha}{m} \sum_{i=1}^{m}(h_\theta(x^{i}) - y^{i}) x^{i} \newline
 \rbrace &
 \end{align*}

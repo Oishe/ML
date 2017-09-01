@@ -1,4 +1,4 @@
-#+SETUPFILE: ../template.org
+#+SETUPFILE: ../tools/template.org
 #+TITLE:2 Learning Model
 * Model
 ** Notation
