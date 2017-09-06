@@ -45,11 +45,15 @@ Therefore to get to the minimum it is crucial that we *SUBTRACT* the rate of cha
 Fig.3 Simultaneous Updates (courtesy of Coursera)
 
 * Learning Rate
-We can adjust $\alpha$ to increase or decrease the step size. We want larger values of $\alpha$ for a faster learning rate however we don't want to overshoot.
-
++ We can adjust $\alpha$ to increase or decrease the step size. We want larger values of $\alpha$ for a faster learning rate however we don't want to overshoot.
 #+HTML: <img src="../img/04LearningRate.png">
 Fig.4 Learning rate and overshoot (courtesy of Coursera)
-
++ Tips for debugging include:
+  + plotting $J(\theta)$ vs number of iterations
+  + setting a convergence test to make sure answer settles
+#+HTML: <img src="../img/04JvsIteration.png">
+#+HTML: <img src="../img/04CorrectDescent.png">
+Fig.5 Fig.6 Tips for choosing $\alpha$
 * Gradient Descent Example: Linear Regression
 Let's simplify what gradient descent looks like for a 2-parameter hypothesis
 ** Known equations
@@ -100,3 +104,4 @@ $$J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2$$
 \theta_j := & \theta_j - \frac{\alpha}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
 \rbrace &
 \end{align*}
+#+HTML: <img src="../img/04FinalAlg.png">

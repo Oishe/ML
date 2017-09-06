@@ -323,17 +323,31 @@ Fig.3 Simultaneous Updates (courtesy of Coursera)<br  />
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6"><span class="section-number-2">6</span> Learning Rate</h2>
 <div class="outline-text-2" id="text-6">
-<p>
-We can adjust \(\alpha\) to increase or decrease the step size. We want larger values of \(\alpha\) for a faster learning rate however we don't want to overshoot.<br  />
-</p>
-
+<ul class="org-ul">
+<li>We can adjust \(\alpha\) to increase or decrease the step size. We want larger values of \(\alpha\) for a faster learning rate however we don't want to overshoot.<br  />
+</li>
+</ul>
 <img src="../img/04LearningRate.png">
 <p>
 Fig.4 Learning rate and overshoot (courtesy of Coursera)<br  />
 </p>
+<ul class="org-ul">
+<li>Tips for debugging include:<br  />
+<ul class="org-ul">
+<li>plotting \(J(\theta)\) vs number of iterations<br  />
+</li>
+<li>setting a convergence test to make sure answer settles<br  />
+</li>
+</ul>
+</li>
+</ul>
+<img src="../img/04JvsIteration.png">
+<img src="../img/04CorrectDescent.png">
+<p>
+Fig.5 Fig.6 Tips for choosing \(\alpha\)<br  />
+</p>
 </div>
 </div>
-
 <div id="outline-container-sec-7" class="outline-2">
 <h2 id="sec-7"><span class="section-number-2">7</span> Gradient Descent Example: Linear Regression</h2>
 <div class="outline-text-2" id="text-7">
@@ -455,6 +469,7 @@ $$J(\theta) = \frac{1}{2m}\sum_{i=1}^m(h_\theta(x)-y)^2$$<br  />
 \theta_j := & \theta_j - \frac{\alpha}{m} \sum_{i=1}^m(h_\theta(x)-y) \cdot x_j \\
 \rbrace &
 \end{align*}
+<img src="../img/04FinalAlg.png">
 </div>
 </div>
 </div>

@@ -1,0 +1,101 @@
+#+SETUPFILE: ../tools/template.org
+#+TITLE: 5 Using Linear Algebra
+* Notation
+** Matrix
++ $m \times n$ matrix 
+  + $m$ rows 
+  + $n$ columns
++ A is a $4\times3$ matrix
+$$ A = \begin{bmatrix}
+w_1 & w_2 & w_3 \\
+x_1 & x_2 & x_3 \\
+y_1 & y_2 & y_3 \\
+z_1 & z_2 & z_3 
+\end{bmatrix}$$
++ $A_{ij}$ is the element in the:
+  + $i$ th row
+  + $j$ th column
+  + $A_{23}=x_3$
+** Vectors
++ Subset of Matricies
+  + Have only one column
+  + $v$ is a $4\times1$ matrix
+$$ v = \begin{bmatrix}
+w \\ x \\ y \\ z
+\end{bmatrix}$$
++ Vector with 'n' rows is referred to as an 'n'-dimensional vector
++ $v_{i}$ is the element in the $i$ th row
+  + $v_{2} = x$
+** Naming Practices
++ Matrices have uppercase names
++ Vectors have lower case names
++ Scalars are real numbers
+** Matrix Algebra
+For the interest of time, I'll be skipping all the matrix algebra. This includes:
++ Scalar multiplication
++ Addition, subtraction
++ Matrix multiplication
++ Matrix properties
+  + not commutative
+  + are associative
+  + identity matrix
+  + inverse
+  + transpose
+* Gradient descent with linear algebra
+** Input/Output
+*NOTE*: The notations for $i$ and $j$ are not consistent; look for superscript or subscript
+*** Multiple Training points (superscript)
++ $(x^{(i)}, y^{(i)})$ is a single training pair
++ $x^{(i)}$ is the x-value of the $i$ th training pair
++ Multiple points would be horizontal
++ $m$ training points
+$$x = \begin{bmatrix}
+x^{(1)} & x^{(2)} & x^{(3)} & \cdots & x^{(m)} \end{bmatrix}$$
+$$y = \begin{bmatrix}
+y^{(1)} & y^{(2)} & y^{(3)} & \cdots & y^{(m)} \end{bmatrix}$$
+*** Multiple features (subscript)
++ $x_j$ representr the $j$ th feature
++ $x_j^{(i)}$ is the $i$ th training point for the $j$ th feature
++ Multiple features are vertical
++ $n$ features
++ $x_0 = 1$
+$$x = \begin{bmatrix}
+x_0 \\ x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}$$
+*** Feature Scaling
++ Multiple features have different ranges which affects gradient descent
+  + for example: length $(1-10mm)$ vs area $(1-100mm^2)$
++ There are two ideal ranges for features
+  + $ -1 \leq x_j \leq 1$
+  + $-0.5 \leq x_j \leq 0.5$
++ Two methods used
+  + Feature scaling 
+    + Dividing all the values by either the range or standard deviation $(s_j)$
+  + Mean normalization
+    + subtracting all values by the mean $(\mu_j)$ to set the mean to zero
+$$ x_j:= \frac{x_j-\mu_j}{s_j}$$
+
+** Hypothesis Function
+*** Theta weights \theta
++ There needs to be a weight for each feature
++ $\theta_j$ is the $j$ th weight
++ $n$ weights
+$$\theta = \begin{bmatrix}
+\theta_0 \\ \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n
+\end{bmatrix}$$
+*** Matrix form
+We'll utilize a transpose vector to get the vector form
+$$ h_{\theta}(x) = \sum_{j=0}^n \theta_j x_j = \begin{bmatrix} \theta_0 & \theta_1 & \cdots & \theta_n \end{bmatrix} \begin{bmatrix} x_0 \\ x_1 \\ \vdots \\ x_n \\ \end{bmatrix} = \theta^T x $$
+** Complex feature model
+*NOTE*: Very important to do feature scaling
+*** Feature dependance
++ Given $x_1$(length) and $x_2$ (width)
++ Create new feature (area):
+$$x_3 := x_1 \cdot x_2$$
+*** Polynoial features
++ Creating closer fits
++ predicting end cases for model
++ Given $x_1$:
+$$x_2 := x_1^2$$
+$$x_3 := x_1^3$$
+$$x_4 := \sqrt{x_1}$$

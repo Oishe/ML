@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>5 Using Linear Algebra</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Oishe Farhan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<h1 class="titleTOP"> <a href="../index.html">Machine Learning</a></h1>
+<link rel="stylesheet" type="text/css" href="../css/style1.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">5 Using Linear Algebra</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Notation</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Matrix</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>\(m \times n\) matrix<br  />
+<ul class="org-ul">
+<li>\(m\) rows<br  />
+</li>
+<li>\(n\) columns<br  />
+</li>
+</ul>
+</li>
+<li>A is a \(4\times3\) matrix<br  />
+</li>
+</ul>
+<p>
+$$ A = \begin{bmatrix}
+w_1 & w_2 & w_3 \\
+x_1 & x_2 & x_3 \\
+y_1 & y_2 & y_3 \\
+z_1 & z_2 & z_3 
+\end{bmatrix}$$<br  />
+</p>
+<ul class="org-ul">
+<li>\(A_{ij}\) is the element in the:<br  />
+<ul class="org-ul">
+<li>\(i\) th row<br  />
+</li>
+<li>\(j\) th column<br  />
+</li>
+<li>\(A_{23}=x_3\)<br  />
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Vectors</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Subset of Matricies<br  />
+<ul class="org-ul">
+<li>Have only one column<br  />
+</li>
+<li>\(v\) is a \(4\times1\) matrix<br  />
+</li>
+</ul>
+</li>
+</ul>
+<p>
+$$ v = \begin{bmatrix}
+w \\ x \\ y \\ z
+\end{bmatrix}$$<br  />
+</p>
+<ul class="org-ul">
+<li>Vector with 'n' rows is referred to as an 'n'-dimensional vector<br  />
+</li>
+<li>\(v_{i}\) is the element in the \(i\) th row<br  />
+<ul class="org-ul">
+<li>\(v_{2} = x\)<br  />
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Naming Practices</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Matrices have uppercase names<br  />
+</li>
+<li>Vectors have lower case names<br  />
+</li>
+<li>Scalars are real numbers<br  />
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Matrix Algebra</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+For the interest of time, I'll be skipping all the matrix algebra. This includes:<br  />
+</p>
+<ul class="org-ul">
+<li>Scalar multiplication<br  />
+</li>
+<li>Addition, subtraction<br  />
+</li>
+<li>Matrix multiplication<br  />
+</li>
+<li>Matrix properties<br  />
+<ul class="org-ul">
+<li>not commutative<br  />
+</li>
+<li>are associative<br  />
+</li>
+<li>identity matrix<br  />
+</li>
+<li>inverse<br  />
+</li>
+<li>transpose<br  />
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Gradient descent with linear algebra</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Input/Output</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+<b>NOTE</b>: The notations for \(i\) and \(j\) are not consistent; look for superscript or subscript<br  />
+</p>
+</div>
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Multiple Training points (superscript)</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<ul class="org-ul">
+<li>\((x^{(i)}, y^{(i)})\) is a single training pair<br  />
+</li>
+<li>\(x^{(i)}\) is the x-value of the \(i\) th training pair<br  />
+</li>
+<li>Multiple points would be horizontal<br  />
+</li>
+<li>\(m\) training points<br  />
+</li>
+</ul>
+<p>
+$$x = \begin{bmatrix}
+x^{(1)} & x^{(2)} & x^{(3)} & \cdots & x^{(m)} \end{bmatrix}$$<br  />
+$$y = \begin{bmatrix}
+y^{(1)} & y^{(2)} & y^{(3)} & \cdots & y^{(m)} \end{bmatrix}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Multiple features (subscript)</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<ul class="org-ul">
+<li>\(x_j\) representr the \(j\) th feature<br  />
+</li>
+<li>\(x_j^{(i)}\) is the \(i\) th training point for the \(j\) th feature<br  />
+</li>
+<li>Multiple features are vertical<br  />
+</li>
+<li>\(n\) features<br  />
+</li>
+<li>\(x_0 = 1\)<br  />
+</li>
+</ul>
+<p>
+$$x = \begin{bmatrix}
+x_0 \\ x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Feature Scaling</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<ul class="org-ul">
+<li>Multiple features have different ranges which affects gradient descent<br  />
+<ul class="org-ul">
+<li>for example: length \((1-10mm)\) vs area \((1-100mm^2)\)<br  />
+</li>
+</ul>
+</li>
+<li>There are two ideal ranges for features<br  />
+<ul class="org-ul">
+<li>$ -1 &le; x_j &le; 1$<br  />
+</li>
+<li>\(-0.5 \leq x_j \leq 0.5\)<br  />
+</li>
+</ul>
+</li>
+<li>Two methods used<br  />
+<ul class="org-ul">
+<li>Feature scaling<br  />
+<ul class="org-ul">
+<li>Dividing all the values by either the range or standard deviation \((s_j)\)<br  />
+</li>
+</ul>
+</li>
+<li>Mean normalization<br  />
+<ul class="org-ul">
+<li>subtracting all values by the mean \((\mu_j)\) to set the mean to zero<br  />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>
+$$ x_j:= \frac{x_j-\mu_j}{s_j}$$<br  />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Hypothesis Function</h3>
+<div class="outline-text-3" id="text-2-2">
+</div><div id="outline-container-sec-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1"><span class="section-number-4">2.2.1</span> Theta weights &theta;</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ul class="org-ul">
+<li>There needs to be a weight for each feature<br  />
+</li>
+<li>\(\theta_j\) is the \(j\) th weight<br  />
+</li>
+<li>\(n\) weights<br  />
+</li>
+</ul>
+<p>
+$$\theta = \begin{bmatrix}
+\theta_0 \\ \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n
+\end{bmatrix}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2"><span class="section-number-4">2.2.2</span> Matrix form</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+We'll utilize a transpose vector to get the vector form<br  />
+$$ h_{\theta}(x) = \sum_{j=0}^n \theta_j x_j = \begin{bmatrix} \theta_0 & \theta_1 & \cdots & \theta_n \end{bmatrix} \begin{bmatrix} x_0 \\ x_1 \\ \vdots \\ x_n \\ \end{bmatrix} = \theta^T x $$<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Complex feature model</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+<b>NOTE</b>: Very important to do feature scaling<br  />
+</p>
+</div>
+<div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Feature dependance</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<ul class="org-ul">
+<li>Given $x_1$(length) and \(x_2\) (width)<br  />
+</li>
+<li>Create new feature (area):<br  />
+</li>
+</ul>
+<p>
+$$x_3 := x_1 \cdot x_2$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Polynoial features</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<ul class="org-ul">
+<li>Creating closer fits<br  />
+</li>
+<li>predicting end cases for model<br  />
+</li>
+<li>Given \(x_1\):<br  />
+</li>
+</ul>
+<p>
+$$x_2 := x_1^2$$<br  />
+$$x_3 := x_1^3$$<br  />
+$$x_4 := \sqrt{x_1}$$<br  />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+<footer>
+<hr/>
+<p>Author: Oishe Farhan</p>
+<p>Email: farhanoishe@gmail.com</p>
+</footer>
+</html>
