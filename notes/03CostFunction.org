@@ -3,11 +3,11 @@
 * Defining the Cost Function
 With our input data $X$ and output data $Y$, we want to predict the best hypothesis function $h(x)$. For this we create a measure of accuracy called the cost function: $J(\theta)$. The cost function can also be reffered to as the error function. We want to minimize the error to come up with an accurate hypothesis. For a simple one variable input and one variable output graph we can have a hypothesis with two coefficients.
 #+ATTR_HTML: :border 0 :rules nil :frame nil
-|            <r> | <l>                   | <l>              |
-|                | $\theta_0$            | y-intercept      |
-|                | $\theta_1$            | slope            |
-| $h_\theta(x)=$ | $\theta_0 +\theta_1x$ | Trend line       |
-|  $ \hat{y}^i=$ | $h_\theta(x^i)$       | Predicted output |
+|              <r> | <l>                   | <l>              |
+|                  | $\theta_0$            | y-intercept      |
+|                  | $\theta_1$            | slope            |
+| $h_{\theta}(x)=$ | $\theta_0 +\theta_1x$ | Trend line       |
+| $\hat{y}^{(i)}=$ | $h_\theta(x^{(i)})$   | Predicted output |
 
 #+HTML: <img src="../img/03costfunction.png" alt="costfunction">
 Fig.1 Cost function intuition (courtesy of Coursera)

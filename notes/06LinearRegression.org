@@ -1,6 +1,6 @@
 #+SETUPFILE: ../tools/template.org
 #+TITLE: 6 Linear Regression
-* Analytical Solution
+* Analytical Solution - Normal Equation
 There exists another way to solve for the weights using linear algebra in one step. It is reminiscent of an calculus min/mac method:
 $$ \frac{d}{d\theta} J(\theta) = 0 \qquad \text{Solve for the vector }\theta$$
 Instead of solving for the actual hypothesis function we would instead fill in all the numbers for each training pair. With just the numbers in a matrix form, we can find the best $\theta$ by using vector projection.
@@ -27,7 +27,7 @@ $$\begin{bmatrix}
 x_0^1 & x_1^1 & \cdots & x_n^1  \\
 x_0^2 & x_1^2 & \cdots & x_n^2  \\
 x_0^3 & x_1^3 & \cdots & x_n^3  \\
-\vdots& \vdots& \ddots &        \\
+\vdots & \vdots & \ddots &        \\
 x_0^m & x_1^m &        & x_n^m 
 \end{bmatrix}
 \begin{bmatrix}

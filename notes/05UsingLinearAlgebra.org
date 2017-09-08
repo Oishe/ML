@@ -43,24 +43,23 @@ For the interest of time, I'll be skipping all the matrix algebra. This includes
   + transpose
 * Gradient descent with linear algebra
 ** Input/Output
-*NOTE*: The notations for $i$ and $j$ are not consistent; look for superscript or subscript
-*** Multiple Training points (superscript)
+*** Multiple Training points (superscript m)
 + $(x^{(i)}, y^{(i)})$ is a single training pair
 + $x^{(i)}$ is the x-value of the $i$ th training pair
-+ Multiple points would be horizontal
-+ $m$ training points
-$$x = \begin{bmatrix}
-x^{(1)} & x^{(2)} & x^{(3)} & \cdots & x^{(m)} \end{bmatrix}$$
-$$y = \begin{bmatrix}
-y^{(1)} & y^{(2)} & y^{(3)} & \cdots & y^{(m)} \end{bmatrix}$$
-*** Multiple features (subscript)
++ Multiple points would be vertical
+$$\begin{align}
+x = \begin{bmatrix}
+x^{(1)} \\ x^{(2)} \\ x^{(3)} \\ \vdots \\ x^{(m)} \end{bmatrix}
+\qquad y = \begin{bmatrix}
+y^{(1)} \\ y^{(2)} \\ y^{(3)} \\ \vdots \\ y^{(m)} \end{bmatrix}
+\end{align}$$
+*** Multiple features (subscript n)
 + $x_j$ representr the $j$ th feature
 + $x_j^{(i)}$ is the $i$ th training point for the $j$ th feature
-+ Multiple features are vertical
-+ $n$ features
++ Multiple features are horizontal
 + $x_0 = 1$
 $$x = \begin{bmatrix}
-x_0 \\ x_1 \\ x_2 \\ \vdots \\ x_n
+x_0 & x_1 & x_2 & \cdots & x_n
 \end{bmatrix}$$
 *** Feature Scaling
 + Multiple features have different ranges which affects gradient descent
@@ -87,15 +86,18 @@ $$\theta = \begin{bmatrix}
 We'll utilize a transpose vector to get the vector form
 $$ h_{\theta}(x) = \sum_{j=0}^n \theta_j x_j = \begin{bmatrix} \theta_0 & \theta_1 & \cdots & \theta_n \end{bmatrix} \begin{bmatrix} x_0 \\ x_1 \\ \vdots \\ x_n \\ \end{bmatrix} = \theta^T x $$
 ** Complex feature model
-*NOTE*: Very important to do feature scaling
+*NOTE*: Very important to do feature scaling with multiple features
 *** Feature dependance
 + Given $x_1$(length) and $x_2$ (width)
-+ Create new feature (area):
++ Create new dependant feature (area)
 $$x_3 := x_1 \cdot x_2$$
 *** Polynoial features
-+ Creating closer fits
-+ predicting end cases for model
-+ Given $x_1$:
-$$x_2 := x_1^2$$
-$$x_3 := x_1^3$$
-$$x_4 := \sqrt{x_1}$$
++ Creating closer fits using higher order polynomials
+  + predicting end cases for model
+  + even predicting closed regions with higher orders
++ Given $x_1$
+$$
+x_2 := (x_1)^2 \qquad
+x_3 := (x_1)^3 \qquad
+x_4 := \sqrt{x_1}
+$$
