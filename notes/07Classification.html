@@ -218,8 +218,12 @@ Linear regression can actually be applied, however it isn't effective. Any outli
 <div class="outline-text-3" id="text-1-4">
 <p>
 For classification it is important to set thresholds. For the binary case, the threshold is (0.5). The classification would still produce a continous number from 0 to 1, however we use the threshold to determine which of the binary output the prediction is.<br  />
-$$h_\theta(x) \geq 0.5 \rightarrow y=1$$<br  />
-$$h_\theta(x) < 0.5 \rightarrow y=0$$<br  />
+</p>
+<p>
+\begin{align*}<br  />
+h_&amp;theta;(x) &ge; 0.5 &rarr; y=1<br  />
+h_&amp;theta;(x) &lt; 0.5 &rarr; y=0<br  />
+\end(align*}<br  />
 </p>
 </div>
 </div>
@@ -232,9 +236,11 @@ $$h_\theta(x) < 0.5 \rightarrow y=0$$<br  />
 <div class="outline-text-3" id="text-2-1">
 <p>
 Sticking with the binary classification problem, we realize that our output \(y\) should be either 0 or 1. We need to devise a new hypothesis functoin with these ranges in mind. However, it would be ideal to keep our feature model from linear regression. So we shall use a wrapper function.<br  />
-$$0 \leq h_\theta(x) \leq 1 \\
-h_\theta(x) = g(\theta^Tx)$$<br  />
 </p>
+\begin{align*}
+0 \leq h_\theta(x) \leq 1 \\
+h_\theta(x) = g(\theta^Tx)
+\end{align*}
 </div>
 </div>
 <div id="outline-container-sec-2-2" class="outline-3">
@@ -306,10 +312,10 @@ By using the special range from 0 to 1, the hypothesis function can be seen as t
 <div id="outline-container-sec-2-3-2" class="outline-4">
 <h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Probablity statements</h4>
 <div class="outline-text-4" id="text-2-3-2">
-<p>
-$$h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta) \\
-P(y=0|x;\theta) + P(y=1|x;\theta) = 1$$<br  />
-</p>
+\begin{align*}
+h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta)\\
+P(y=0|x;\theta) + P(y=1|x;\theta) = 1
+\end{align*}
 </div>
 </div>
 </div>
@@ -349,9 +355,11 @@ $$h_\theta(x) = g(\theta^Tx) = \frac{1}{1+e^{-\theta^Tx}}$$<br  />
 <div class="outline-text-3" id="text-3-1">
 <p>
 The old cost function will have multiple local minimums because of the non-linearity present in the sigmoid.<br  />
-$$J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
-Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2$$<br  />
 </p>
+\begin{align*}
+J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
+Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2
+\end{align*}
 <img src="../img/07convex.png">
 <p>
 Fig.2 Convex vs nonconvex (courtesy of Coursera)<br  />
@@ -361,15 +369,13 @@ Fig.2 Convex vs nonconvex (courtesy of Coursera)<br  />
 <div id="outline-container-sec-3-2" class="outline-3">
 <h3 id="sec-3-2"><span class="section-number-3">3.2</span> Rewrite for convex cost function</h3>
 <div class="outline-text-3" id="text-3-2">
-<p>
-$$Cost \big(h_&amp;theta;(x), y \big) =<br  />
-</p>
-<p>
-\begin{cases}<br  />
--log h_&amp;theta;(x) &amp; \text{if } y=1 <br  />
--log\big(1-h_&amp;theta;(x)\big) &amp; \text{if } y=0 <br  />
-\end{cases}$$<br  />
-</p>
+\begin{align*}
+Cost \big(h_\theta(x), y \big) = 
+\begin{cases}
+-\log h_\theta(x) & \text{if } y=1 \\
+-\log\big(1-h_\theta(x)\big) & \text{if } y=0 \\
+\end{cases}
+\end{align*}
 <img src="../img/07y1cost.png"> <img src="../img/07y0cost.png">
 <p>
 Fig.3 The graphs of \(J(\theta)\) vs \(h_\theta(x)\) (courtesy of coursera)<br  />
@@ -435,12 +441,12 @@ As you can see by cleverly choosing our cost function we arrive at the exact sam
 <div id="outline-container-sec-3-5" class="outline-3">
 <h3 id="sec-3-5"><span class="section-number-3">3.5</span> Vectorized gradient descent</h3>
 <div class="outline-text-3" id="text-3-5">
-<p>
-$$g(z) = \frac{1}{1+e^{-z}} \\ \\
+\begin{align*}
+g(z) = \frac{1}{1+e^{-z}} \\ \\
 h = g\big(X\theta\big) \\
 J(\theta)=\frac{1}{m} \Big(-y^T \log h - (1-y)^T \log(1-h) \Big) \\
-\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)$$<br  />
-</p>
+\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)
+\end{align*}
 </div>
 </div>
 </div>

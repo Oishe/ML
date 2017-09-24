@@ -11,13 +11,17 @@ $$ y \in \{ 0, 1, 2, 3, \cdots \} $$
 Linear regression can actually be applied, however it isn't effective. Any outlier in the data can drastically change the line of best fit. It can also give results where the line is well above 1 or below 0.
 ** Thresholding
 For classification it is important to set thresholds. For the binary case, the threshold is (0.5). The classification would still produce a continous number from 0 to 1, however we use the threshold to determine which of the binary output the prediction is.
-$$h_\theta(x) \geq 0.5 \rightarrow y=1$$
-$$h_\theta(x) < 0.5 \rightarrow y=0$$
+\begin{align*}
+h_\theta(x) \geq 0.5 \rightarrow y=1\\
+h_\theta(x) < 0.5 \rightarrow y=0
+\end(align*}
 * Logistic Regression Model
 ** Hypothesis Representation
 Sticking with the binary classification problem, we realize that our output $y$ should be either 0 or 1. We need to devise a new hypothesis functoin with these ranges in mind. However, it would be ideal to keep our feature model from linear regression. So we shall use a wrapper function.
-$$0 \leq h_\theta(x) \leq 1 \\
-h_\theta(x) = g(\theta^Tx)$$
+\begin{align*}
+0 \leq h_\theta(x) \leq 1 \\
+h_\theta(x) = g(\theta^Tx)
+\end{align*}
 ** Logistic function (the sigmoid)
 The wrapper function we will use is known as either the sigmoid or the logistic function. It has some very special properties.
 $$g(z) = \frac{1}{1+e^{-z}}$$
@@ -35,8 +39,10 @@ By using the special range from 0 to 1, the hypothesis function can be seen as t
 *** Probability definition
 $P(y=1|x;\theta) :$ Probability that $y=1$, given $x$, parameterized by $\theta$
 *** Probablity statements
-$$h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta) \\
-P(y=0|x;\theta) + P(y=1|x;\theta) = 1$$
+\begin{align*}
+h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta)\\
+P(y=0|x;\theta) + P(y=1|x;\theta) = 1
+\end{align*}
 ** Decision boundary
 The boundary is where the hypothesis makes a 50-50 split desicion. If we look at the sigmoid function we can find this point:
 $$g(z) = 0.5 \rightarrow z=0$$
@@ -55,16 +61,20 @@ $$h_\theta(x) = g(\theta^Tx) = \frac{1}{1+e^{-\theta^Tx}}$$
 * Modifying Cost function
 ** Non-linearity with old cost function
 The old cost function will have multiple local minimums because of the non-linearity present in the sigmoid.
-$$J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
-Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2$$
+\begin{align*}
+J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
+Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2
+\end{align*}
 #+HTML: <img src="../img/07convex.png">
 Fig.2 Convex vs nonconvex (courtesy of Coursera)
 ** Rewrite for convex cost function
-$$Cost \big(h_\theta(x), y \big) = 
+\begin{align*}
+Cost \big(h_\theta(x), y \big) = 
 \begin{cases}
 -\log h_\theta(x) & \text{if } y=1 \\
 -\log\big(1-h_\theta(x)\big) & \text{if } y=0 \\
-\end{cases}$$
+\end{cases}
+\end{align*}
 #+HTML: <img src="../img/07y1cost.png"> <img src="../img/07y0cost.png">
 Fig.3 The graphs of $J(\theta)$ vs $h_\theta(x)$ (courtesy of coursera)
 
@@ -108,10 +118,12 @@ As you can see by cleverly choosing our cost function we arrive at the exact sam
 \theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m \big(h_\theta(x)-y\big) \cdot x_j \\
 \end{align*}
 ** Vectorized gradient descent
-$$g(z) = \frac{1}{1+e^{-z}} \\ \\
+\begin{align*}
+g(z) = \frac{1}{1+e^{-z}} \\ \\
 h = g\big(X\theta\big) \\
 J(\theta)=\frac{1}{m} \Big(-y^T \log h - (1-y)^T \log(1-h) \Big) \\
-\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)$$
+\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)
+\end{align*}
 * Advanced Optimization Techniques
 A few methods to list. They are far more complex to implement but arrive at the solution at a faster rate and sometimes even automatically adjust the learning rate $\alpha$.
 + Conjugate gradient
