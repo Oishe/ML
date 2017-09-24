@@ -6,3 +6,4 @@
 #+OPTIONS: todo:t tasks:t <:nil broken-links:mark date:nil html-style:t 
 #+OPTIONS: date:nil html-postamble:nil
 #+HTML_MATHJAX: align:center tagside:right font:Neo-Euler path="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"
+#+HTML_MATHJOKES: align:center tagside:right font:Neo-Euler path="../MathJax/MathJax.js"

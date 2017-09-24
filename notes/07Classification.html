@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>7 Classification</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Oishe Farhan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<h1 class="titleTOP"> <a href="../index.html">Machine Learning</a></h1>
+<link rel="stylesheet" type="text/css" href="../css/style1.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">7 Classification</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Types of Discrete Output</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Classification is a type of pattern recognition. Given the training set, it categorizes the data into specific clusters. Unlike regression which predicts continous output, classification predicts discrete output.<br  />
+</p>
+<img src="../img/07classes.png">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Binary class</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+$$ y \in \{ 0, 1 \} \qquad 0:\text{no} \quad 1:\text{yes} $$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Multiclass</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+$$ y \in \{ 0, 1, 2, 3, \cdots \} $$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Why linear regression doesn't work</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Linear regression can actually be applied, however it isn't effective. Any outlier in the data can drastically change the line of best fit. It can also give results where the line is well above 1 or below 0.<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Thresholding</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+For classification it is important to set thresholds. For the binary case, the threshold is (0.5). The classification would still produce a continous number from 0 to 1, however we use the threshold to determine which of the binary output the prediction is.<br  />
+$$h_\theta(x) \geq 0.5 \rightarrow y=1$$<br  />
+$$h_\theta(x) < 0.5 \rightarrow y=0$$<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Logistic Regression Model</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Hypothesis Representation</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Sticking with the binary classification problem, we realize that our output \(y\) should be either 0 or 1. We need to devise a new hypothesis functoin with these ranges in mind. However, it would be ideal to keep our feature model from linear regression. So we shall use a wrapper function.<br  />
+$$0 \leq h_\theta(x) \leq 1 \\
+h_\theta(x) = g(\theta^Tx)$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Logistic function (the sigmoid)</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+The wrapper function we will use is known as either the sigmoid or the logistic function. It has some very special properties.<br  />
+$$g(z) = \frac{1}{1+e^{-z}}$$<br  />
+$$ \lim_{z \rightarrow -\infty} g(z) = 0 \qquad g(0)=0.5 \qquad \lim_{z \rightarrow +\infty} g(z) = 1$$<br  />
+</p>
+<img src="../img/07sigmoid.png">
+<p>
+Fig.1 Sigmoid function<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Hypothesis as a probability</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+By using the special range from 0 to 1, the hypothesis function can be seen as the probability of predicting the output \(y=1\).<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">\(h_\theta\)</th>
+<th scope="col" class="right">\(P(y=1)\)</th>
+<th scope="col" class="right">\(P(y=0)\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">\(0\)</td>
+<td class="right">\(0\%\)</td>
+<td class="right">\(100\%\)</td>
+</tr>
+
+<tr>
+<td class="right">\(0.5\)</td>
+<td class="right">\(50\%\)</td>
+<td class="right">\(50\%\)</td>
+</tr>
+
+<tr>
+<td class="right">\(1\)</td>
+<td class="right">\(100\%\)</td>
+<td class="right">\(0\%\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> Probability definition</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+\(P(y=1|x;\theta) :\) Probability that \(y=1\), given \(x\), parameterized by \(\theta\)<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> Probablity statements</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+$$h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta) \\
+P(y=0|x;\theta) + P(y=1|x;\theta) = 1$$<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Decision boundary</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+The boundary is where the hypothesis makes a 50-50 split desicion. If we look at the sigmoid function we can find this point:<br  />
+$$g(z) = 0.5 \rightarrow z=0$$<br  />
+Therefore for any hypothesis function we can figure out what boundary it creates:<br  />
+$$\begin{align*}
+h_\theta(x) &= g(\theta^Tx) \\
+\theta^Tx &= 0 \quad \text{(boundary)}
+\end{align*}$$<br  />
+With more complex higher order features, the boundaries can encapsualte the training points very well.<br  />
+Here is an eliptical boundary for example:<br  />
+$$\begin{align*} \begin{bmatrix} -1 & 2 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ x_1^2 \\ x_2^2 \end{bmatrix} &= 0 \\
+2x_1^2 + x_2^2 &= 1 \end{align*}$$<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Final form</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+$$h_\theta(x) = g(\theta^Tx) = \frac{1}{1+e^{-\theta^Tx}}$$<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Modifying Cost function</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Non-linearity with old cost function</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+The old cost function will have multiple local minimums because of the non-linearity present in the sigmoid.<br  />
+$$J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
+Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2$$<br  />
+</p>
+<img src="../img/07convex.png">
+<p>
+Fig.2 Convex vs nonconvex (courtesy of Coursera)<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Rewrite for convex cost function</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+$$Cost \big(h_&amp;theta;(x), y \big) =<br  />
+</p>
+<p>
+\begin{cases}<br  />
+-log h_&amp;theta;(x) &amp; \text{if } y=1 <br  />
+-log\big(1-h_&amp;theta;(x)\big) &amp; \text{if } y=0 <br  />
+\end{cases}$$<br  />
+</p>
+<img src="../img/07y1cost.png"> <img src="../img/07y0cost.png">
+<p>
+Fig.3 The graphs of \(J(\theta)\) vs \(h_\theta(x)\) (courtesy of coursera)<br  />
+</p>
+
+<p>
+We are severly penalizing the system if it is inaccurate.<br  />
+$$\begin{align*}
+h_\theta(x) = y \quad &: \quad J(\theta) \rightarrow 0 \\
+h_\theta(x) \neq y \quad &: \quad J(\theta) \rightarrow \infty
+\end{align*}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Gradient descent derivation</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+To find the gradient we'll have to take the gradient of the cost function<br  />
+$$\frac{\partial}{\partial \theta_j}J(\theta) =
+\frac{1}{m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j}Cost \big( h_\theta(x^{(i)}), y^{(i)} \big)$$<br  />
+</p>
+
+<p>
+Let's rewrite our cost function into one equation so that we don't have to use piecewise functions. \(y\) can only be either 0 or 1.<br  />
+$$Cost(h_\theta(x), y) = -y\log h_\theta(x) -(1-y)\log\big(1-h_\theta(x)\big)$$<br  />
+To simplify our work, let's perform some clever manipulations:<br  />
+</p>
+
+\begin{align*}
+h_\theta(x) &= (1+e^{-\theta^Tx})^{-1} \\
+1-h_\theta(x)&=\frac{(1+e^{-\theta^Tx})-1}{1+e^{-\theta^Tx}} =e^{-\theta^Tx}(1+e^{-\theta^Tx})^{-1}
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial \theta_j}h_\theta(x) &= -(1+e^{-\theta^Tx})^{-2} \cdot e^{-\theta^Tx} \cdot -x_j \\
+&= h_\theta(x) \cdot \big( 1-h_\theta(x) \big) \cdot x_j \\
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial \theta_j}Cost(h_\theta(x), y) &= -y\frac{1}{h_\theta(x)} \cdot \frac{\partial}{\partial\theta_j}h_\theta(x)
++(1-y) \frac{1}{1-h_\theta(x)}\frac{\partial}{\partial\theta_j}h_\theta(x) \\
+&= -y \cdot \big(1-h_\theta(x)\big) \cdot x_j + (1-y) \cdot h_\theta(x) \cdot x_j \\
+&= \Big( -y +y h_\theta(x) + h_\theta(x) -y h_\theta(x) \Big) \cdot x_j \\
+&= \big(h_\theta(x) - y\big) \cdot x_j
+\end{align*}
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Simplified gradient descent</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+As you can see by cleverly choosing our cost function we arrive at the exact same gradient descent model:<br  />
+</p>
+
+\begin{align*}
+\frac{\partial}{\partial\theta_j}J(\theta) = \frac{1}{m}\sum_{i=1}^m \big( h_\theta(x) -y \big) \cdot x_j \\
+\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m \big(h_\theta(x)-y\big) \cdot x_j \\
+\end{align*}
+</div>
+</div>
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Vectorized gradient descent</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+$$g(z) = \frac{1}{1+e^{-z}} \\ \\
+h = g\big(X\theta\big) \\
+J(\theta)=\frac{1}{m} \Big(-y^T \log h - (1-y)^T \log(1-h) \Big) \\
+\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)$$<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Advanced Optimization Techniques</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+A few methods to list. They are far more complex to implement but arrive at the solution at a faster rate and sometimes even automatically adjust the learning rate \(\alpha\).<br  />
+</p>
+<ul class="org-ul">
+<li>Conjugate gradient<br  />
+</li>
+<li>BFGS<br  />
+</li>
+<li>L-BFGS<br  />
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Multiclass Classifications (One-vs-all)</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Can start from either 0 or 1. In this course we will start at \(1\). This means there are \(n\) different classes.<br  />
+This method breaks down multiclass regression into \(n\) different binary class logistic regression. We choose our test class \(i\) and treat it as binary \(1\) whereas everything else we label as binary \(0\). This way we perform \(n\) different binary logistic regressions and come up with \(n\) different hypothesis functions. We then choose the value with the highest hypothesis function as our prediction.<br  />
+</p>
+
+<img src="../img/07multi.png">
+<p>
+Fig.4 One-vs-all classifications (courtesy of Coursera)<br  />
+</p>
+
+\begin{align*}
+y \in & \{ 1, 2, 3, \cdots n \} \\ \\
+h_\theta^{(1)}(x) &= P(y=1|x;\theta) \\
+h_\theta^{(2)}(x) &= P(y=2|x;\theta) \\
+h_\theta^{(i)}(x) &= P(y=i|x;\theta) \\
+& \quad \vdots \\
+h_\theta^{(n)}(x) &= P(y=n|x;\theta) \\ \\
+\text{Prediction} &= \max_i \big(h_\theta^{(i)}(x)\big)
+\end{align*}
+</div>
+</div>
+</div>
+</body>
+</html>
+<footer>
+<hr/>
+<p>Author: Oishe Farhan</p>
+<p>Email: farhanoishe@gmail.com</p>
+</footer>
+</html>

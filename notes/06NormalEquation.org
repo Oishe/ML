@@ -1,34 +1,21 @@
 #+SETUPFILE: ../tools/template.org
-#+TITLE: 6 Linear Regression
-* Analytical Solution - Normal Equation
-There exists another way to solve for the weights using linear algebra in one step. It is reminiscent of an calculus min/mac method:
+#+TITLE: 6 Normal Equation
+* Analytical Solution
+There exists another way to solve for the weights using linear algebra in one step. It is reminiscent of calculus's min/max method:
 $$ \frac{d}{d\theta} J(\theta) = 0 \qquad \text{Solve for the vector }\theta$$
 Instead of solving for the actual hypothesis function we would instead fill in all the numbers for each training pair. With just the numbers in a matrix form, we can find the best $\theta$ by using vector projection.
 ** Equation
 We'll be looking to solve the following equation:
 $$X \theta = y$$
-*NOTE*: We will follow the coursera method, but this could also be re-orginsed and re-written in a different way: $\theta X = y$
-** Design Matrix $X$
-+ Input matrix containing features and training points
-+ $m$ -rows for $m$ training points
-+ $(n+1)$ - columns for $n$ features
-  + Includes the extra $x_0$ feature
-  + $x_0=1$ for all training points
-+ $x_n^{(m)} = n \text{th feature of } m \text{th training point}$
-$$X = \begin{bmatrix}
-x_0^1 & x_1^1 & \cdots & x_n^1  \\
-x_0^2 & x_1^2 & \cdots & x_n^2  \\
-x_0^3 & x_1^3 & \cdots & x_n^3  \\
-\vdots& \vdots& \ddots &        \\
-x_0^m & x_1^m &        & x_n^m  \\
-\end{bmatrix}$$
+*NOTE*: We will follow the coursera method, but the design matrix could also be re-orginsed and re-written in a different way: $\theta^T X = y$
 ** Full equation
-$$\begin{bmatrix}
-x_0^1 & x_1^1 & \cdots & x_n^1  \\
-x_0^2 & x_1^2 & \cdots & x_n^2  \\
-x_0^3 & x_1^3 & \cdots & x_n^3  \\
-\vdots & \vdots & \ddots &        \\
-x_0^m & x_1^m &        & x_n^m 
+Here, $X$ is our input and $y$ is our output. We're trying to find the best projection $\theta$ to map from our input space to our output.
+$$ \begin{bmatrix}
+x_0^1  & x_1^1  & \cdots & x_n^1  \\
+x_0^2  & x_1^2  & \cdots & x_n^2  \\
+x_0^3  & x_1^3  & \cdots & x_n^3  \\
+\vdots & \vdots & \ddots & \vdots \\
+x_0^m  & x_1^m  & \cdots & x_n^m 
 \end{bmatrix}
 \begin{bmatrix}
 \theta_0 \\ \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n 
@@ -36,7 +23,7 @@ x_0^m & x_1^m &        & x_n^m
 \begin{bmatrix}
 y^0 \\ y^1 \\ y^2 \\ \vdots \\ y^m 
 \end{bmatrix}$$
-** Solving $\theta$
+** Solving for $\theta$
 1. Turn the design matrix $X$ into a square matrix to find the inverse.
 2. Multiply the transpose $X^T$ to each side
 3. Find the inverse and multiply to each side

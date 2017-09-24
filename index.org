@@ -14,7 +14,8 @@
 3. [[./notes/03CostFunction.html][Cost Function]]
 4. [[./notes/04GradientDescent.html][Gradient Descent]]
 5. [[./notes/05UsingLinearAlgebra.html][Using Linear Algebra]]
-6. [[./notes/06LinearRegression.html][Linear Regression]]
+6. [[./notes/06NormalEquation.html][Normal Equation]]
+7. [[./notes/07Classification.html][Classification]]
 * Tools
 + [[https://www.youtube.com/watch?v=SzA2YODtgK4][Emac's Org Mode]] to take notes
 + *[[./tools/OrgTutorial.html][Tutorial]]* for Org Mode and shortcuts

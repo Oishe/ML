@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>6 Linear Regression</title>
+<title>6 Normal Equation</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Oishe Farhan" />
@@ -180,12 +180,12 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">6 Linear Regression</h1>
+<h1 class="title">6 Normal Equation</h1>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Analytical Solution - Normal Equation</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Analytical Solution</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-There exists another way to solve for the weights using linear algebra in one step. It is reminiscent of an calculus min/mac method:<br  />
+There exists another way to solve for the weights using linear algebra in one step. It is reminiscent of calculus's min/max method:<br  />
 $$ \frac{d}{d\theta} J(\theta) = 0 \qquad \text{Solve for the vector }\theta$$<br  />
 Instead of solving for the actual hypothesis function we would instead fill in all the numbers for each training pair. With just the numbers in a matrix form, we can find the best \(\theta\) by using vector projection.<br  />
 </p>
@@ -196,50 +196,21 @@ Instead of solving for the actual hypothesis function we would instead fill in a
 <p>
 We'll be looking to solve the following equation:<br  />
 $$X \theta = y$$<br  />
-<b>NOTE</b>: We will follow the coursera method, but this could also be re-orginsed and re-written in a different way: \(\theta X = y\)<br  />
+<b>NOTE</b>: We will follow the coursera method, but the design matrix could also be re-orginsed and re-written in a different way: \(\theta^T X = y\)<br  />
 </p>
 </div>
 </div>
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Design Matrix \(X\)</h3>
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Full equation</h3>
 <div class="outline-text-3" id="text-1-2">
-<ul class="org-ul">
-<li>Input matrix containing features and training points<br  />
-</li>
-<li>\(m\) -rows for \(m\) training points<br  />
-</li>
-<li>\((n+1)\) - columns for \(n\) features<br  />
-<ul class="org-ul">
-<li>Includes the extra \(x_0\) feature<br  />
-</li>
-<li>\(x_0=1\) for all training points<br  />
-</li>
-</ul>
-</li>
-<li>\(x_n^{(m)} = n \text{th feature of } m \text{th training point}\)<br  />
-</li>
-</ul>
 <p>
-$$X = \begin{bmatrix}
-x_0^1 & x_1^1 & \cdots & x_n^1  \\
-x_0^2 & x_1^2 & \cdots & x_n^2  \\
-x_0^3 & x_1^3 & \cdots & x_n^3  \\
-\vdots& \vdots& \ddots &        \\
-x_0^m & x_1^m &        & x_n^m  \\
-\end{bmatrix}$$<br  />
-</p>
-</div>
-</div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Full equation</h3>
-<div class="outline-text-3" id="text-1-3">
-<p>
-$$\begin{bmatrix}<br  />
-x_0^1 &amp; x_1^1 &amp; &ctdot; &amp; x_n^1  <br  />
-x_0^2 &amp; x_1^2 &amp; &ctdot; &amp; x_n^2  <br  />
-x_0^3 &amp; x_1^3 &amp; &ctdot; &amp; x_n^3  <br  />
-\vdots &amp; \vdots &amp; \ddots &amp;        <br  />
-x_0^m &amp; x_1^m &amp;        &amp; x_n^m <br  />
+Here, \(X\) is our input and \(y\) is our output. We're trying to find the best projection \(\theta\) to map from our input space to our output.<br  />
+$$ \begin{bmatrix}<br  />
+x_0^1  &amp; x_1^1  &amp; &ctdot; &amp; x_n^1  <br  />
+x_0^2  &amp; x_1^2  &amp; &ctdot; &amp; x_n^2  <br  />
+x_0^3  &amp; x_1^3  &amp; &ctdot; &amp; x_n^3  <br  />
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots <br  />
+x_0^m  &amp; x_1^m  &amp; &ctdot; &amp; x_n^m <br  />
 \end{bmatrix}<br  />
 </p>
 <p>
@@ -254,9 +225,9 @@ y^0 \\ y^1 \\ y^2 \\ \vdots \\ y^m <br  />
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Solving \(\theta\)</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Solving for \(\theta\)</h3>
+<div class="outline-text-3" id="text-1-3">
 <ol class="org-ol">
 <li>Turn the design matrix \(X\) into a square matrix to find the inverse.<br  />
 </li>
@@ -275,9 +246,9 @@ X^T X \theta                &= X^T y              \\
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Cases for Noninvertability</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Cases for Noninvertability</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 Sometimes \(X^TX\) is noninvertible<br  />
 </p>

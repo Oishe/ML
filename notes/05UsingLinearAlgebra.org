@@ -47,12 +47,12 @@ For the interest of time, I'll be skipping all the matrix algebra. This includes
 + $(x^{(i)}, y^{(i)})$ is a single training pair
 + $x^{(i)}$ is the x-value of the $i$ th training pair
 + Multiple points would be vertical
-$$\begin{align}
+$$\begin{align*}
 x = \begin{bmatrix}
 x^{(1)} \\ x^{(2)} \\ x^{(3)} \\ \vdots \\ x^{(m)} \end{bmatrix}
 \qquad y = \begin{bmatrix}
 y^{(1)} \\ y^{(2)} \\ y^{(3)} \\ \vdots \\ y^{(m)} \end{bmatrix}
-\end{align}$$
+\end{align*}$$
 *** Multiple features (subscript n)
 + $x_j$ representr the $j$ th feature
 + $x_j^{(i)}$ is the $i$ th training point for the $j$ th feature
@@ -61,11 +61,27 @@ y^{(1)} \\ y^{(2)} \\ y^{(3)} \\ \vdots \\ y^{(m)} \end{bmatrix}
 $$x = \begin{bmatrix}
 x_0 & x_1 & x_2 & \cdots & x_n
 \end{bmatrix}$$
+*** Design Matrix $X$
++ Input matrix containing features and training points
++ $m$ -rows for $m$ training points
++ $(n+1)$ - columns for $n$ features + $x_0$
+  + Includes the extra $x_0$ feature
+  + $x_0=1$ for all training points
++ $x_n^{(m)} = n \text{th feature of } m \text{th training point}$
+$$X = \begin{bmatrix}
+x_0^1 & x_1^1 & \cdots & x_n^1  \\
+x_0^2 & x_1^2 & \cdots & x_n^2  \\
+x_0^3 & x_1^3 & \cdots & x_n^3  \\
+\vdots& \vdots& \ddots & \vdots \\
+x_0^m & x_1^m & \cdots & x_n^m  \\
+\end{bmatrix}$$
 *** Feature Scaling
 + Multiple features have different ranges which affects gradient descent
-  + for example: length $(1-10mm)$ vs area $(1-100mm^2)$
-+ There are two ideal ranges for features
-  + $ -1 \leq x_j \leq 1$
+  + Scaling affects the rate of change for each variable which could be uneven
+  + The output $y$ does not need to be scaled
+  + Ex: length(1-10mm) vs area(1-100mm^2)
++ There are two ideal ranges for feature scalling
+  + $-1 \leq x_j \leq 1$
   + $-0.5 \leq x_j \leq 0.5$
 + Two methods used
   + Feature scaling 
@@ -73,7 +89,6 @@ x_0 & x_1 & x_2 & \cdots & x_n
   + Mean normalization
     + subtracting all values by the mean $(\mu_j)$ to set the mean to zero
 $$ x_j:= \frac{x_j-\mu_j}{s_j}$$
-
 ** Hypothesis Function
 *** Theta weights \theta
 + There needs to be a weight for each feature
@@ -82,22 +97,62 @@ $$ x_j:= \frac{x_j-\mu_j}{s_j}$$
 $$\theta = \begin{bmatrix}
 \theta_0 \\ \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n
 \end{bmatrix}$$
-*** Matrix form
-We'll utilize a transpose vector to get the vector form
+*** Vector form
+We will utilize a transpose vector to get the vector form
 $$ h_{\theta}(x) = \sum_{j=0}^n \theta_j x_j = \begin{bmatrix} \theta_0 & \theta_1 & \cdots & \theta_n \end{bmatrix} \begin{bmatrix} x_0 \\ x_1 \\ \vdots \\ x_n \\ \end{bmatrix} = \theta^T x $$
+*** Matrix form (design matrix)
+We will utilize the design matrix to simultaneously apply the hypothesis function to all our inputs and come up with our prediction $\hat{y}$.
+$$X \theta = \hat{y}$$
+$$ \begin{bmatrix}
+x_0^1  & x_1^1  & \cdots & x_n^1  \\
+x_0^2  & x_1^2  & \cdots & x_n^2  \\
+x_0^3  & x_1^3  & \cdots & x_n^3  \\
+\vdots & \vdots & \ddots & \vdots \\
+x_0^m  & x_1^m  & \cdots & x_n^m 
+\end{bmatrix}
+\begin{bmatrix}
+\theta_0 \\ \theta_1 \\ \theta_2 \\ \vdots \\ \theta_n 
+\end{bmatrix} = 
+\begin{bmatrix}
+\hat{y}^0 \\ \hat{y}^1 \\ \hat{y}^2 \\ \vdots \\ \hat{y}^m 
+\end{bmatrix}$$
 ** Complex feature model
-*NOTE*: Very important to do feature scaling with multiple features
+When we are limited by the number of features available, we can create more features. Ideally this is to fit our data better.
+It is very important to do feature scaling as features can get out of proportions.
 *** Feature dependance
 + Given $x_1$(length) and $x_2$ (width)
 + Create new dependant feature (area)
-$$x_3 := x_1 \cdot x_2$$
+$$x_1; \qquad x_2; \qquad x_3 := x_1 \cdot x_2$$
 *** Polynoial features
 + Creating closer fits using higher order polynomials
   + predicting end cases for model
   + even predicting closed regions with higher orders
-+ Given $x_1$
 $$
-x_2 := (x_1)^2 \qquad
-x_3 := (x_1)^3 \qquad
-x_4 := \sqrt{x_1}
+x_1; \qquad
+x_2; \qquad
+x_3 := (x_1)^2 \qquad
+x_4 := (x_2)^3 \qquad
+x_5 := \sqrt{x_1}
 $$
+* Advanced Vectorization
+** Hypothesis 
+$$h_{\theta}(X) = X\theta$$
+** Cost Function
+$$\begin{align*}
+J(\theta) &= \frac{1}{2m} \sum_{i=1}^{m}(X\theta-y)^2 \\
+J(\theta) &= \frac{1}{2m} (X\theta-y)^T \cdot (X\theta-y)
+\end{align*}$$
+** Cost Gradient vector
+$$\delta_j = \frac{\partial}{\partial \theta_j} J(\theta) = \frac{1}{m} \sum_{i=1}^m (h_{\theta}(x^{(i)}) - y^{(i)}) \cdot x_j^{(i)} $$
+$$\delta = \begin{bmatrix}
+\delta_0 \\
+\delta_1 \\
+\vdots \\
+\delta_n
+\end{bmatrix} = \frac{1}{m}X^T(X\theta-y)
+$$
+** Gradient Descent
+$$\begin{align*}
+\theta &:= \theta - \alpha \delta \\
+\theta &:= \theta - \frac{\alpha}{m}X^T(X\theta-y)
+\end{align*}$$

@@ -1,0 +1,135 @@
+#+SETUPFILE: ../tools/template.org
+#+TITLE: 7 Classification
+* Types of Discrete Output
+Classification is a type of pattern recognition. Given the training set, it categorizes the data into specific clusters. Unlike regression which predicts continous output, classification predicts discrete output.
+#+HTML: <img src="../img/07classes.png">
+** Binary class
+$$ y \in \{ 0, 1 \} \qquad 0:\text{no} \quad 1:\text{yes} $$
+** Multiclass
+$$ y \in \{ 0, 1, 2, 3, \cdots \} $$
+** Why linear regression doesn't work
+Linear regression can actually be applied, however it isn't effective. Any outlier in the data can drastically change the line of best fit. It can also give results where the line is well above 1 or below 0.
+** Thresholding
+For classification it is important to set thresholds. For the binary case, the threshold is (0.5). The classification would still produce a continous number from 0 to 1, however we use the threshold to determine which of the binary output the prediction is.
+$$h_\theta(x) \geq 0.5 \rightarrow y=1$$
+$$h_\theta(x) < 0.5 \rightarrow y=0$$
+* Logistic Regression Model
+** Hypothesis Representation
+Sticking with the binary classification problem, we realize that our output $y$ should be either 0 or 1. We need to devise a new hypothesis functoin with these ranges in mind. However, it would be ideal to keep our feature model from linear regression. So we shall use a wrapper function.
+$$0 \leq h_\theta(x) \leq 1 \\
+h_\theta(x) = g(\theta^Tx)$$
+** Logistic function (the sigmoid)
+The wrapper function we will use is known as either the sigmoid or the logistic function. It has some very special properties.
+$$g(z) = \frac{1}{1+e^{-z}}$$
+$$ \lim_{z \rightarrow -\infty} g(z) = 0 \qquad g(0)=0.5 \qquad \lim_{z \rightarrow +\infty} g(z) = 1$$
+#+HTML: <img src="../img/07sigmoid.png">
+Fig.1 Sigmoid function
+** Hypothesis as a probability
+By using the special range from 0 to 1, the hypothesis function can be seen as the probability of predicting the output $y=1$.
+|        <r> |      <r> |      <r> |
+| $h_\theta$ | $P(y=1)$ | $P(y=0)$ |
+|------------+----------+----------|
+|        $0$ |    $0\%$ |  $100\%$ |
+|      $0.5$ |   $50\%$ |   $50\%$ |
+|        $1$ |  $100\%$ |    $0\%$ |
+*** Probability definition
+$P(y=1|x;\theta) :$ Probability that $y=1$, given $x$, parameterized by $\theta$
+*** Probablity statements
+$$h_\theta(x) = P(y=1|x;\theta) = 1 - P(y=0|x;\theta) \\
+P(y=0|x;\theta) + P(y=1|x;\theta) = 1$$
+** Decision boundary
+The boundary is where the hypothesis makes a 50-50 split desicion. If we look at the sigmoid function we can find this point:
+$$g(z) = 0.5 \rightarrow z=0$$
+Therefore for any hypothesis function we can figure out what boundary it creates:
+$$\begin{align*}
+h_\theta(x) &= g(\theta^Tx) \\
+\theta^Tx &= 0 \quad \text{(boundary)}
+\end{align*}$$
+With more complex higher order features, the boundaries can encapsualte the training points very well.
+Here is an eliptical boundary for example:
+$$\begin{align*} \begin{bmatrix} -1 & 2 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ x_1^2 \\ x_2^2 \end{bmatrix} &= 0 \\
+2x_1^2 + x_2^2 &= 1 \end{align*}$$
+
+** Final form
+$$h_\theta(x) = g(\theta^Tx) = \frac{1}{1+e^{-\theta^Tx}}$$
+* Modifying Cost function
+** Non-linearity with old cost function
+The old cost function will have multiple local minimums because of the non-linearity present in the sigmoid.
+$$J(\theta) = \frac{1}{m} \sum_{i=1}^m Cost \big( h_\theta(x^{(i)}), y^{(i)} \big) \\
+Cost \big( h_\theta(x), y \big) = \frac{1}{2} \big(h_\theta(x) - y \big)^2$$
+#+HTML: <img src="../img/07convex.png">
+Fig.2 Convex vs nonconvex (courtesy of Coursera)
+** Rewrite for convex cost function
+$$Cost \big(h_\theta(x), y \big) = 
+\begin{cases}
+-\log h_\theta(x) & \text{if } y=1 \\
+-\log\big(1-h_\theta(x)\big) & \text{if } y=0 \\
+\end{cases}$$
+#+HTML: <img src="../img/07y1cost.png"> <img src="../img/07y0cost.png">
+Fig.3 The graphs of $J(\theta)$ vs $h_\theta(x)$ (courtesy of coursera)
+
+We are severly penalizing the system if it is inaccurate.
+$$\begin{align*}
+h_\theta(x) = y \quad &: \quad J(\theta) \rightarrow 0 \\
+h_\theta(x) \neq y \quad &: \quad J(\theta) \rightarrow \infty
+\end{align*}$$
+** Gradient descent derivation
+To find the gradient we'll have to take the gradient of the cost function
+$$\frac{\partial}{\partial \theta_j}J(\theta) =
+\frac{1}{m} \sum_{i=1}^m \frac{\partial}{\partial \theta_j}Cost \big( h_\theta(x^{(i)}), y^{(i)} \big)$$
+
+Let's rewrite our cost function into one equation so that we don't have to use piecewise functions. $y$ can only be either 0 or 1.
+$$Cost(h_\theta(x), y) = -y\log h_\theta(x) -(1-y)\log\big(1-h_\theta(x)\big)$$
+To simplify our work, let's perform some clever manipulations:
+
+\begin{align*}
+h_\theta(x) &= (1+e^{-\theta^Tx})^{-1} \\
+1-h_\theta(x)&=\frac{(1+e^{-\theta^Tx})-1}{1+e^{-\theta^Tx}} =e^{-\theta^Tx}(1+e^{-\theta^Tx})^{-1}
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial \theta_j}h_\theta(x) &= -(1+e^{-\theta^Tx})^{-2} \cdot e^{-\theta^Tx} \cdot -x_j \\
+&= h_\theta(x) \cdot \big( 1-h_\theta(x) \big) \cdot x_j \\
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial \theta_j}Cost(h_\theta(x), y) &= -y\frac{1}{h_\theta(x)} \cdot \frac{\partial}{\partial\theta_j}h_\theta(x)
++(1-y) \frac{1}{1-h_\theta(x)}\frac{\partial}{\partial\theta_j}h_\theta(x) \\
+&= -y \cdot \big(1-h_\theta(x)\big) \cdot x_j + (1-y) \cdot h_\theta(x) \cdot x_j \\
+&= \Big( -y +y h_\theta(x) + h_\theta(x) -y h_\theta(x) \Big) \cdot x_j \\
+&= \big(h_\theta(x) - y\big) \cdot x_j
+\end{align*}
+
+** Simplified gradient descent
+As you can see by cleverly choosing our cost function we arrive at the exact same gradient descent model:
+
+\begin{align*}
+\frac{\partial}{\partial\theta_j}J(\theta) = \frac{1}{m}\sum_{i=1}^m \big( h_\theta(x) -y \big) \cdot x_j \\
+\theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m \big(h_\theta(x)-y\big) \cdot x_j \\
+\end{align*}
+** Vectorized gradient descent
+$$g(z) = \frac{1}{1+e^{-z}} \\ \\
+h = g\big(X\theta\big) \\
+J(\theta)=\frac{1}{m} \Big(-y^T \log h - (1-y)^T \log(1-h) \Big) \\
+\theta := \theta - \frac{\alpha}{m} X^T \big( h - y\big)$$
+* Advanced Optimization Techniques
+A few methods to list. They are far more complex to implement but arrive at the solution at a faster rate and sometimes even automatically adjust the learning rate $\alpha$.
++ Conjugate gradient
++ BFGS
++ L-BFGS
+* Multiclass Classifications (One-vs-all)
+Can start from either 0 or 1. In this course we will start at $1$. This means there are $n$ different classes.
+This method breaks down multiclass regression into $n$ different binary class logistic regression. We choose our test class $i$ and treat it as binary $1$ whereas everything else we label as binary $0$. This way we perform $n$ different binary logistic regressions and come up with $n$ different hypothesis functions. We then choose the value with the highest hypothesis function as our prediction.
+
+#+HTML: <img src="../img/07multi.png">
+Fig.4 One-vs-all classifications (courtesy of Coursera)
+
+\begin{align*}
+y \in & \{ 1, 2, 3, \cdots n \} \\ \\
+h_\theta^{(1)}(x) &= P(y=1|x;\theta) \\
+h_\theta^{(2)}(x) &= P(y=2|x;\theta) \\
+h_\theta^{(i)}(x) &= P(y=i|x;\theta) \\
+& \quad \vdots \\
+h_\theta^{(n)}(x) &= P(y=n|x;\theta) \\ \\
+\text{Prediction} &= \max_i \big(h_\theta^{(i)}(x)\big)
+\end{align*}
