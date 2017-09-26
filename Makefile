@@ -10,7 +10,8 @@ all:$(IORG)
 	cat ./tools/postamble.txt >> $(IHTML); \
 	echo "</html>" >> $(IHTML)
 	echo ------------- $(NOTES) ---------------; \
-	$(MAKE) -C $(NOTES)
+	$(MAKE) -C $(NOTES); \
+	$(MAKE) clean
 
 clean:
 	echo ------------- CLEAN ---------------; \
