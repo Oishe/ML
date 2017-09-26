@@ -1,0 +1,44 @@
+#+SETUPFILE: ../tools/template.org
+#+TITLE: 8 Regularization
+* The problem of Overfitting
+To get a better prediction of the data, more features are added however we run into the problem of overfitting. This is where the hypothesis function matches the specific data set very closely but fails to provide the same results if we expand the data set. The cause for this is known as overfitting and this is something we look to avoid in both linear and logistic regression.
+#+HTML: <img src="../img/08linear.png">
+Fig.1 Linear regression overfitting (courtesy of Coursera)
+#+HTML: <img src="../img/08logistic.png">
+Fig.2 Logistic regression overfitting (courtesy of Coursera)
+* Possible Solutions
+** Plotting the hypothesis
+This is only possible with 2 or 3 features but can show if there is an overfit for the data. This isn't possible with higher number of features.
+** Reducing the number of features
+Manually select features to keep and eliminate others. This will reduce overfitting however this gets rid of data that might otherwise be useful. Use a model selection algorithm (studied in the future)
+** Regularization
+Keep all the features but reduce the magnitude/values of the parameter $\theta_j$. This will mean less contribution from the higher order features keeping the fit more general. This works best when there are a lot of features where each contribute to predictiong y.
+* Regularization
+The basic idea is change our hypothesis to penalize the coefficients $\theta_j$ for the higher order features. Small values for the parameters $\theta$ lead to a "simpler" hypothesis and is less prone to over fitting. The term $\lambda$ is called the regularization parameter.
+Note: $\theta_0 =1$ doesn't need to be regularized so $j$ starts from $1$.
+#+HTML: <img src="../img/08parameter.png">
+** Linear cost funtion
+$$\min_\theta J(\theta) = \min_\theta \frac{1}{2m} \big[ \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)^2 + \lambda \sum_{j=1}^n \theta_j^2 \big]$$
+** Logistic cost function
+$$\min_\theta J(\theta) = \min_\theta \frac{1}{m}  \sum_{i=1}^m \Big[-y^{(i)} \log h_\theta(x^{(i)}) -(1-y^{(i)})\log\big(1-h_\theta(x^{(i)}) \big)\Big] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2$$
+
+** Linear + Logistic regression alg
+If we simplfy our new gradient descent algorithm we get the following algorithm. Here $j$ should start at $1$ not $0$.
+Notice how this is the same for linear or logistic. The only difference is the actual equation for $h_\theta(x)$
+$$\begin{align*}
+\theta_j :=& \theta_j - \frac{\alpha}{m} \Big[ \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)x_j^{(i)} + \lambda \theta_j \Big] \\
+\theta_j :=& \theta_j(1- \lambda \frac{\alpha}{m}) - \frac{\alpha}{m} \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)x_j^{(i)}
+\end{align*}$$
+If you notice we arrive with a term $(1- \lambda \frac{\alpha}{m})$ which is responisble for keep our parameters small.
+** Normal equation regularization
+This is uses the previous method that we used but adds in a term for $\lambda$. We'd normally use the identity matrix $I$ for this however because we don't want to alter $\theta_0$ we modify our identity matrix:
+$$L = \begin{bmatrix}
+0 &  &  &        &   \\
+  &1 &  &        &   \\
+  &  &1 &        &   \\
+  &  &  & \ddots &   \\
+  &  &  &        & 1 \\
+\end{bmatrix}$$
+$$(n+1)\times(n+1)$$
+$$ \theta = \big( X^T X + \lambda L \big)^{-1} X^Ty$$
+** Logistic regression regularization

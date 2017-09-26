@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>8 Regularization</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Oishe Farhan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<h1 class="titleTOP"> <a href="../index.html">Machine Learning</a></h1>
+<link rel="stylesheet" type="text/css" href="../css/style1.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">8 Regularization</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> The problem of Overfitting</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+To get a better prediction of the data, more features are added however we run into the problem of overfitting. This is where the hypothesis function matches the specific data set very closely but fails to provide the same results if we expand the data set. The cause for this is known as overfitting and this is something we look to avoid in both linear and logistic regression.<br  />
+</p>
+<img src="../img/08linear.png">
+<p>
+Fig.1 Linear regression overfitting (courtesy of Coursera)<br  />
+</p>
+<img src="../img/08logistic.png">
+<p>
+Fig.2 Logistic regression overfitting (courtesy of Coursera)<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Possible Solutions</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Plotting the hypothesis</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+This is only possible with 2 or 3 features but can show if there is an overfit for the data. This isn't possible with higher number of features.<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Reducing the number of features</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Manually select features to keep and eliminate others. This will reduce overfitting however this gets rid of data that might otherwise be useful. Use a model selection algorithm (studied in the future)<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Regularization</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Keep all the features but reduce the magnitude/values of the parameter \(\theta_j\). This will mean less contribution from the higher order features keeping the fit more general. This works best when there are a lot of features where each contribute to predictiong y.<br  />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Regularization</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The basic idea is change our hypothesis to penalize the coefficients \(\theta_j\) for the higher order features. Small values for the parameters \(\theta\) lead to a "simpler" hypothesis and is less prone to over fitting. The term \(\lambda\) is called the regularization parameter.<br  />
+Note: \(\theta_0 =1\) doesn't need to be regularized so \(j\) starts from \(1\).<br  />
+</p>
+<img src="../img/08parameter.png">
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Linear cost funtion</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+$$\min_\theta J(\theta) = \min_\theta \frac{1}{2m} \big[ \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)^2 + \lambda \sum_{j=1}^n \theta_j^2 \big]$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Logistic cost function</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+$$\min_\theta J(\theta) = \min_\theta \frac{1}{m}  \sum_{i=1}^m \Big[-y^{(i)} \log h_\theta(x^{(i)}) -(1-y^{(i)})\log\big(1-h_\theta(x^{(i)}) \big)\Big] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2$$<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Linear + Logistic regression alg</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+If we simplfy our new gradient descent algorithm we get the following algorithm. Here \(j\) should start at \(1\) not \(0\).<br  />
+Notice how this is the same for linear or logistic. The only difference is the actual equation for \(h_\theta(x)\)<br  />
+$$\begin{align*}
+\theta_j :=& \theta_j - \frac{\alpha}{m} \Big[ \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)x_j^{(i)} + \lambda \theta_j \Big] \\
+\theta_j :=& \theta_j(1- \lambda \frac{\alpha}{m}) - \frac{\alpha}{m} \sum_{i=1}^m \big( h_\theta(x^{(i)}) - y^{(i)} \big)x_j^{(i)}
+\end{align*}$$<br  />
+If you notice we arrive with a term \((1- \lambda \frac{\alpha}{m})\) which is responisble for keep our parameters small.<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Normal equation regularization</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+This is uses the previous method that we used but adds in a term for \(\lambda\). We'd normally use the identity matrix \(I\) for this however because we don't want to alter \(\theta_0\) we modify our identity matrix:<br  />
+$$L = \begin{bmatrix}
+0 &  &  &        &   \\
+  &1 &  &        &   \\
+  &  &1 &        &   \\
+  &  &  & \ddots &   \\
+  &  &  &        & 1 \\
+\end{bmatrix}$$<br  />
+$$(n+1)\times(n+1)$$<br  />
+$$ \theta = \big( X^T X + \lambda L \big)^{-1} X^Ty$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Logistic regression regularization</h3>
+</div>
+</div>
+</div>
+</body>
+</html>
+<footer>
+<hr/>
+<p>Author: Oishe Farhan</p>
+<p>Email: farhanoishe@gmail.com</p>
+</footer>
+</html>

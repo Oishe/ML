@@ -1,5 +1,5 @@
 #+SETUPFILE: ../tools/template.org
-#+TITLE: 5 Using Linear Algebra
+#+TITLE: 5 Vectorization
 * Notation
 ** Matrix
 + $m \times n$ matrix 
