@@ -17,6 +17,7 @@
 6. [[./notes/06NormalEquation.html][Normal Equation]]
 7. [[./notes/07Classification.html][Classification]]
 8. [[./notes/08Regularization.html][Regularization]]
+9. [[./notes/09NeuralNetworks.html][Neural Networks]] 
 * Tools
 + [[https://www.youtube.com/watch?v=SzA2YODtgK4][Emac's Org Mode]] to take notes
 + *[[./tools/OrgTutorial.html][Tutorial]]* for Org Mode and shortcuts

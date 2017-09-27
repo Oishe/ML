@@ -1,0 +1,21 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/oishe/github/ML/index.org
+
+
+* Table of Contents
+:PROPERTIES:
+:ARCHIVE_TIME: 2017-09-26 Tue 18:30
+:ARCHIVE_FILE: ~/github/ML/index.org
+:ARCHIVE_CATEGORY: index
+:END:
+1. [[./notes/01Introduction.html][Introduction]]
+2. [[./notes/02LearningModel.org][Learning Model]]
+3. [[./notes/03CostFunction.html][Cost Function]]
+4. [[./notes/04GradientDescent.html][Gradient Descent]]
+5. [[./notes/05Vectorization.html][Vectorization]]
+6. [[./notes/06NormalEquation.html][Normal Equation]]
+7. [[./notes/07Classification.html][Classification]]
+8. [[./notes/08Regularization.html][Regularization]]
+9. [[./notes/09NeuralNetworks.html][Neural Networks]] 

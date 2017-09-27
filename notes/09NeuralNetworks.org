@@ -1,0 +1,72 @@
+#+SETUPFILE: ../tools/template.org
+#+TITLE: 9 Neural Networks
+* Flaw with linear and logistic regression
+We've learned two methods so far: linear and logistic regression. The problem arises when we have numerous features and we decide to increase the order of our features. Given $n$ features if we choose an order $r=2$ feature map, we come up with $n^2/2$ parameters to train! This gets severely worse as we increase our order.
+| Order | Traning Parameters |
+|-------+--------------------|
+|   <r> |                <r> |
+|   $1$ |                $n$ |
+|   $2$ |            $n^2/2$ |
+|   $3$ |    $n(n+1)(n+2)/6$ |
+|   $4$ |           $O(n^4)$ |
+The general form with $n$ features and order $r$ is derived from finding combinations with repition:
+$$\begin{pmatrix}r+n-1 \\ r \end{pmatrix} = \frac{(r+n-1)!}{r!(n-1)!}$$
+We quickly see that by increasing our order $r$ we end up with $O(n^r)$ parameters to train and this isn't feasible for certain models. A good example of this pitfall is image recognition.
+#+HTML: <img src="../img/09camera.png">
+Here the features $n$ would be the total number of pixels that we are training. A new method is needed to perform tasks like image recognition.
+* Neural Networks
+** One learning algorithm
+We know the human brain can perform image recognition without a problem. So why not study how the brain works and try and implement a learning algorithm like it. There is a fascinating observation made where we realized the brain has only "one learning algorithm". That is to say that you can interchange parts of the brain and the brain will learn to adapt.
+#+HTML: <img src="../img/09OneLearning.png">
+** Modelling neurons
+Neurons can be thought of as simple adding machinces. If a signal is passed onto a neuron it will add the up the signals and if it passes a threshold it will fire as well relaying a new signal.
+#+HTML: <img src="../img/09neuron.png">
+#+HTML: <img src="../img/09Nmodel.png">
+Sometimes for the neuron model the "bias" parameter $\theta_0$ will not be included. The activation function $h_\theta(x)$ will be the sigmoid function in our case. And the weights $(W)$ are the same thing as the parameters $(\theta)$. So in the end we get the same hypothesis function as we did for logistic regression:
+$$h_\theta(x) = \frac{1}{1+e^{-\theta^Tx}}$$
+** Network architecture
+The strength of the neural network comes from connceting multiple "layers" of neurons. There will always be input neurons, hidden neurons and output neurons. The input neurons can be thought of as sensory neurons and the output neurons will make the prediction or perform an action.
+#+HTML: <img src="../img/09layers.png">
+For the example case above, we come with the following equations:
+$$\begin{align*}
+a_i^{(j)} &= \text{ "activation" of unit }i \text{ in layer }j \\
+\Theta^{(j)} &= \text{ matrix of weights from layer } j \text{ to layer } j+1 \\
+\Theta_{nm}^{(j)} &= \text{ is the weight from } a_m^{(j)} \rightarrow a_n^{(j+1)} \\
+s_j &= \text{# units in layer } j \\
+s_{j+1} &= \text{# units in layer } j+1 \\
+\Theta^{(j)} &\text{ is } s_{j+1} \times (s_j +1) \text{ matrix} \\ \\
+a_0^{(2)} &= 1 \\
+a_1^{(2)} &= g \big( \Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3 \big) \\
+a_2^{(2)} &= g \big( \Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3 \big) \\
+a_3^{(2)} &= g \big( \Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3 \big) \\
+h_\Theta(x) = a_1^{(3)} &= g \big( \Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)} \big) \\
+\Theta^{(1)} &\text{ is } (3\times 4) \text{ and }\Theta^{(2)} \text{ is } (1\times 4)
+\end{align*}$$
+** Vectorizing
+$$\begin{align*}
+\Theta^{(1)} &= \begin{bmatrix}
+\Theta_{10} & \Theta_{11} & \Theta_{12} & \Theta_{13} \\
+\Theta_{20} & \Theta_{21} & \Theta_{22} & \Theta_{23} \\
+\Theta_{30} & \Theta_{31} & \Theta_{32} & \Theta_{33} \end{bmatrix} \qquad
+x = a^{(1)} = \begin{bmatrix} x_0 \\ x_1 \\ x_2 \\ x_3 \end{bmatrix} \\
+\Theta^{(2)} &= \begin{bmatrix} \Theta_{10} & \Theta_{11} & \Theta_{12} & \Theta_{13} \end{bmatrix} \\
+a^{(2)} &= \begin{bmatrix} a_0 \\ a_1 \\ a_2 \\ a_3  \end{bmatrix} = g\big( \Theta^{(1)} a^{(1)}\big) \\
+h_\Theta(x) &= a^{(3)} = g\big( \Theta^{(2)} a^{(2)} \big) \\
+\end{align*}$$
+We're effectively performing logistic regression for each neuron. However we're creating complex architectures and feeding our outputs from one layer as inputs to the next layer. At the junction between layers are our parameters $\Theta$ that we will be optimizing.
+$$a^{(j+1)} = g\big(\Theta^{(j)}a^{(j)}\big)$$
+** Boolean gate examples
+#+HTML: <img src="../img/09AND.png">
+#+HTML: <img src="../img/09OR.png">
+#+HTML: <img src="../img/09NOT.png">
+#+HTML: <img src="../img/09XNOR.png">
+*Each individual gate*
+$$\begin{align*}AND: \Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20\end{bmatrix} \\ NOR: \Theta^{(1)} &= \begin{bmatrix}10 & -20 & -20\end{bmatrix} \\ OR: \Theta^{(1)} &= \begin{bmatrix}-10 & 20 & 20\end{bmatrix} \end{align*}$$
+*Combine to get XNOR*
+$$\begin{align*} AND + NOR: \Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20 \newline 10 & -20 & -20\end{bmatrix} \\
+OR: \Theta^{(2)} &=\begin{bmatrix}-10 & 20 & 20\end{bmatrix} \\
+a^{(2)} &= g(\Theta^{(1)} \cdot x) \\
+h_\Theta(x) = a^{(3)} &= g(\Theta^{(2)} \cdot a^{(2)}) \\
+\end{align*}$$
+** Multiclass (One-vs-all)
+#+HTML: <img src="../img/09oneVall.png">

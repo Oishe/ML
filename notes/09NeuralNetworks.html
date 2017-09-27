@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>9 Neural Networks</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Oishe Farhan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<h1 class="titleTOP"> <a href="../index.html">Machine Learning</a></h1>
+<link rel="stylesheet" type="text/css" href="../css/style1.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">9 Neural Networks</h1>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Flaw with linear and logistic regression</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+We've learned two methods so far: linear and logistic regression. The problem arises when we have numerous features and we decide to increase the order of our features. Given \(n\) features if we choose an order \(r=2\) feature map, we come up with \(n^2/2\) parameters to train! This gets severely worse as we increase our order.<br  />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="right">Order</th>
+<th scope="col" class="right">Traning Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="right">\(1\)</td>
+<td class="right">\(n\)</td>
+</tr>
+
+<tr>
+<td class="right">\(2\)</td>
+<td class="right">\(n^2/2\)</td>
+</tr>
+
+<tr>
+<td class="right">\(3\)</td>
+<td class="right">\(n(n+1)(n+2)/6\)</td>
+</tr>
+
+<tr>
+<td class="right">\(4\)</td>
+<td class="right">\(O(n^4)\)</td>
+</tr>
+</tbody>
+</table>
+<p>
+The general form with \(n\) features and order \(r\) is derived from finding combinations with repition:<br  />
+$$\begin{pmatrix}r+n-1 \\ r \end{pmatrix} = \frac{(r+n-1)!}{r!(n-1)!}$$<br  />
+We quickly see that by increasing our order \(r\) we end up with \(O(n^r)\) parameters to train and this isn't feasible for certain models. A good example of this pitfall is image recognition.<br  />
+</p>
+<img src="../img/09camera.png">
+<p>
+Here the features \(n\) would be the total number of pixels that we are training. A new method is needed to perform tasks like image recognition.<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Neural Networks</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> One learning algorithm</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+We know the human brain can perform image recognition without a problem. So why not study how the brain works and try and implement a learning algorithm like it. There is a fascinating observation made where we realized the brain has only "one learning algorithm". That is to say that you can interchange parts of the brain and the brain will learn to adapt.<br  />
+</p>
+<img src="../img/09OneLearning.png">
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Modelling neurons</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Neurons can be thought of as simple adding machinces. If a signal is passed onto a neuron it will add the up the signals and if it passes a threshold it will fire as well relaying a new signal.<br  />
+</p>
+<img src="../img/09neuron.png">
+<img src="../img/09Nmodel.png">
+<p>
+Sometimes for the neuron model the "bias" parameter \(\theta_0\) will not be included. The activation function \(h_\theta(x)\) will be the sigmoid function in our case. And the weights \((W)\) are the same thing as the parameters \((\theta)\). So in the end we get the same hypothesis function as we did for logistic regression:<br  />
+$$h_\theta(x) = \frac{1}{1+e^{-\theta^Tx}}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Network architecture</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+The strength of the neural network comes from connceting multiple "layers" of neurons. There will always be input neurons, hidden neurons and output neurons. The input neurons can be thought of as sensory neurons and the output neurons will make the prediction or perform an action.<br  />
+</p>
+<img src="../img/09layers.png">
+<p>
+For the example case above, we come with the following equations:<br  />
+$$\begin{align*}
+a_i^{(j)} &= \text{ "activation" of unit }i \text{ in layer }j \\
+\Theta^{(j)} &= \text{ matrix of weights from layer } j \text{ to layer } j+1 \\
+\Theta_{nm}^{(j)} &= \text{ is the weight from } a_m^{(j)} \rightarrow a_n^{(j+1)} \\
+s_j &= \text{# units in layer } j \\
+s_{j+1} &= \text{# units in layer } j+1 \\
+\Theta^{(j)} &\text{ is } s_{j+1} \times (s_j +1) \text{ matrix} \\ \\
+a_0^{(2)} &= 1 \\
+a_1^{(2)} &= g \big( \Theta_{10}^{(1)}x_0 + \Theta_{11}^{(1)}x_1 + \Theta_{12}^{(1)}x_2 + \Theta_{13}^{(1)}x_3 \big) \\
+a_2^{(2)} &= g \big( \Theta_{20}^{(1)}x_0 + \Theta_{21}^{(1)}x_1 + \Theta_{22}^{(1)}x_2 + \Theta_{23}^{(1)}x_3 \big) \\
+a_3^{(2)} &= g \big( \Theta_{30}^{(1)}x_0 + \Theta_{31}^{(1)}x_1 + \Theta_{32}^{(1)}x_2 + \Theta_{33}^{(1)}x_3 \big) \\
+h_\Theta(x) = a_1^{(3)} &= g \big( \Theta_{10}^{(2)}a_0^{(2)} + \Theta_{11}^{(2)}a_1^{(2)} + \Theta_{12}^{(2)}a_2^{(2)} + \Theta_{13}^{(2)}a_3^{(2)} \big) \\
+\Theta^{(1)} &\text{ is } (3\times 4) \text{ and }\Theta^{(2)} \text{ is } (1\times 4)
+\end{align*}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Vectorizing</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+$$\begin{align*}
+\Theta^{(1)} &= \begin{bmatrix}
+\Theta_{10} & \Theta_{11} & \Theta_{12} & \Theta_{13} \\
+\Theta_{20} & \Theta_{21} & \Theta_{22} & \Theta_{23} \\
+\Theta_{30} & \Theta_{31} & \Theta_{32} & \Theta_{33} \end{bmatrix} \qquad
+x = a^{(1)} = \begin{bmatrix} x_0 \\ x_1 \\ x_2 \\ x_3 \end{bmatrix} \\
+\Theta^{(2)} &= \begin{bmatrix} \Theta_{10} & \Theta_{11} & \Theta_{12} & \Theta_{13} \end{bmatrix} \\
+a^{(2)} &= \begin{bmatrix} a_0 \\ a_1 \\ a_2 \\ a_3  \end{bmatrix} = g\big( \Theta^{(1)} a^{(1)}\big) \\
+h_\Theta(x) &= a^{(3)} = g\big( \Theta^{(2)} a^{(2)} \big) \\
+\end{align*}$$<br  />
+We're effectively performing logistic regression for each neuron. However we're creating complex architectures and feeding our outputs from one layer as inputs to the next layer. At the junction between layers are our parameters \(\Theta\) that we will be optimizing.<br  />
+$$a^{(j+1)} = g\big(\Theta^{(j)}a^{(j)}\big)$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Boolean gate examples</h3>
+<div class="outline-text-3" id="text-2-5">
+<img src="../img/09AND.png">
+<img src="../img/09OR.png">
+<img src="../img/09NOT.png">
+<img src="../img/09XNOR.png">
+<p>
+<b>Each individual gate</b><br  />
+$$\begin{align*}AND: \Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20\end{bmatrix} \\ NOR: \Theta^{(1)} &= \begin{bmatrix}10 & -20 & -20\end{bmatrix} \\ OR: \Theta^{(1)} &= \begin{bmatrix}-10 & 20 & 20\end{bmatrix} \end{align*}$$<br  />
+<b>Combine to get XNOR</b><br  />
+$$\begin{align*} AND + NOR: \Theta^{(1)} &=\begin{bmatrix}-30 & 20 & 20 \newline 10 & -20 & -20\end{bmatrix} \\
+OR: \Theta^{(2)} &=\begin{bmatrix}-10 & 20 & 20\end{bmatrix} \\
+a^{(2)} &= g(\Theta^{(1)} \cdot x) \\
+h_\Theta(x) = a^{(3)} &= g(\Theta^{(2)} \cdot a^{(2)}) \\
+\end{align*}$$<br  />
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Multiclass (One-vs-all)</h3>
+<div class="outline-text-3" id="text-2-6">
+<img src="../img/09oneVall.png">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+<footer>
+<hr/>
+<p>Author: Oishe Farhan</p>
+<p>Email: farhanoishe@gmail.com</p>
+</footer>
+</html>
