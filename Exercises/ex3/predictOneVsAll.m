@@ -12,7 +12,7 @@ m = size(X, 1);
 num_labels = size(all_theta, 1);
 
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
+p = zeros(m, 1);
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
@@ -29,7 +29,11 @@ X = [ones(m, 1) X];
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
 %       
-
+h = sigmoid(X*all_theta');
+max_h = max(h, [],2);
+% don't know how to deal with when two values are the same
+p_bool = h >= (max_h*ones(1,num_labels));
+p = p_bool * [(1:num_labels)']; 
 
 
 
