@@ -1,0 +1,29 @@
+#+SETUPFILE: ../tools/template.org
+#+TITLE: 10 Training and Backpropagation
+* Training
+** Definitions
+*** Binary Classifcation (1 output unit)
+$$y \in \{0,1\}$$
+*** Multi-class classification (Used when $K \geq 3$ as binary does two classes)
+$$\begin{align*}
+y &\in \mathbb{R} ^K \text{for } K=3 \\
+y &= \begin{bmatrix} 1 \\ 0 \\ 0  \end{bmatrix} , \begin{bmatrix} 0 \\ 1 \\ 0  \end{bmatrix} , \begin{bmatrix} 0 \\ 0 \\ 1  \end{bmatrix} 
+\end{align*}$$
+*** Numbering
+$$\{(x^{(1)},y^{(1)}), (x^{(2)},y^{(2)}), \cdots, (x^{(m)},y^{(m)})\}$$
+$$\begin{align*}
+L &= \text{total number of layers in network} \\
+s_l &= \text{number of units in layer } l \text{ (not counting bias unit)}\end{align*}$$
+** Cost function
+We're going to be using the cost function from logistic regression but we have to account for all the weights in all the layers.
+*** Logistic regression
+$$J(\theta) = - \frac{1}{m} \Big[ \sum_{i=1}^m \log h_\theta \big(x^{(i)} \big) + \Big(1-y^{(i)} \Big) \log \Big(1-h_\theta \big(x^{(i)} \big) \Big) \Big] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2$$
+*** Neural network
+The double sum traveres over all our input values $x^{(i)}$ and expected output values $y^{(i)}$ for each multi-class classification $k$.
+The regularization triple sum accounts for all values $(j,i)$ in our $\Theta$ matrix for each layer $(l)$ of our network.
+$$\begin{align*}
+h_\Theta(x) &\in \mathbb{R} \qquad \big(h_\Theta(x)\big)_i = i^{th} \text{ output} \\
+J\big(\Theta\big) &= -\frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \Big[y_k^{(i)} \log\Big(\big(h_\Theta(x^{(i)})\big)_k\Big) + \Big(1-y_k^{(i)}\Big) \log\Big(1-\big(h_\Theta(x^{(i)})\big)_k\Big)\Big] \\
+&+ \frac{\lambda}{2m} \sum_{l=1}^{L-1}\sum_{i=i}^{s_l}\sum_{j=1}^{s_l+1}\big(\Theta_{j,i}^{(l)}\big)^2 \\
+\end{align*}$$
+** Back Propogation

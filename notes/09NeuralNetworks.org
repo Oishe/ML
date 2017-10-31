@@ -9,6 +9,7 @@ We've learned two methods so far: linear and logistic regression. The problem ar
 |   $2$ |            $n^2/2$ |
 |   $3$ |    $n(n+1)(n+2)/6$ |
 |   $4$ |           $O(n^4)$ |
+|   $r$ |           $O(n^r)$ |
 The general form with $n$ features and order $r$ is derived from finding combinations with repition:
 $$\begin{pmatrix}r+n-1 \\ r \end{pmatrix} = \frac{(r+n-1)!}{r!(n-1)!}$$
 We quickly see that by increasing our order $r$ we end up with $O(n^r)$ parameters to train and this isn't feasible for certain models. A good example of this pitfall is image recognition.
@@ -24,7 +25,7 @@ Neurons can be thought of as simple adding machinces. If a signal is passed onto
 #+HTML: <img src="../img/09Nmodel.png">
 Sometimes for the neuron model the "bias" parameter $\theta_0$ will not be included. The activation function $h_\theta(x)$ will be the sigmoid function in our case. And the weights $(W)$ are the same thing as the parameters $(\theta)$. So in the end we get the same hypothesis function as we did for logistic regression:
 $$h_\theta(x) = \frac{1}{1+e^{-\theta^Tx}}$$
-** Network architecture
+** Network architecture - Forward Propagation
 The strength of the neural network comes from connceting multiple "layers" of neurons. There will always be input neurons, hidden neurons and output neurons. The input neurons can be thought of as sensory neurons and the output neurons will make the prediction or perform an action.
 #+HTML: <img src="../img/09layers.png">
 For the example case above, we come with the following equations:
